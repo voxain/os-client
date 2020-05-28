@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");
 
 const router = express.Router();
 router.get("*", (req, res) => {
-  res.send(req.originalUrl);
+  let URL = req.originalUrl.substring("/.netlify/functions/server".length);
+  res.send(URL);
 });
 
 app.use(bodyParser.json());
