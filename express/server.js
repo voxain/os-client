@@ -14,6 +14,10 @@ router.get("/script.js", (req, res) => {
   );
 });
 
+var serveIndex = require("serve-index");
+app.use("/p", serveIndex(__dirname));
+app.use("/p", express.static(__dirname));
+
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
 
