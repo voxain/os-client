@@ -64,7 +64,7 @@ let LoadWindows = function () {
 
 let ProgramList = {};
 let GetProgram = function (program) {
-  return ProgramList[program.toLowerCase()] || {};
+  return ProgramList[(program || "").toLowerCase()] || {};
 };
 let Program = function (name, func, options) {
   this.program = {
