@@ -21,6 +21,12 @@ let filesystem = new Program(
       },
     ];
 
+    let receiveFiles = function () {
+      console.log(f);
+      if (f.error) return;
+      setFiles(f.files, f.files[0].path.replace("/", "").includes("/"));
+    };
+
     // https://icons8.com/icon/pack/files/material--black
 
     function setFiles(fs, backButton) {
@@ -33,14 +39,18 @@ let filesystem = new Program(
           let back = document.createElement("button");
           back.innerHTML = "Back";
           back.onclick = function () {
-            socket.emit("fetchFiles", {
-              username: "dev",
-              password: "MeowOS",
-              path: fs[0].path
-                .split("/")
-                .slice(0, fs[0].path.split("/").length - 2)
-                .join("/"),
-            });
+            $.post(
+              APIURL + "fetchFiles",
+              {
+                username: "dev",
+                password: "MeowOS",
+                path: fs[0].path
+                  .split("/")
+                  .slice(0, fs[0].path.split("/").length - 2)
+                  .join("/"),
+              },
+              receiveFiles
+            );
           };
           list.appendChild(back);
         }
@@ -58,11 +68,15 @@ let filesystem = new Program(
           info.onclick = function () {
             if (!f.path.includes(".")) {
               list.id = "FETCHING";
-              socket.emit("fetchFiles", {
-                username: "dev",
-                password: "MeowOS",
-                path: f.path.substring(1),
-              });
+              $.post(
+                APIURL + "fetchFiles",
+                {
+                  username: "dev",
+                  password: "MeowOS",
+                  path: f.path.substring(1),
+                },
+                receiveFiles
+              );
               console.log(f.path.substring(1));
               list.innerHTML = "Loading...";
             } else {
@@ -94,18 +108,19 @@ let filesystem = new Program(
     }
     setFiles(files);
 
-    socket.emit("fetchFiles", { username: "dev", password: "MeowOS" });
-    /*socket.emit("writeFile", {
-    auth: { username: "dev", password: "MeowOS" },
-    path: "/file.txt",
-    content: "Test: " + Date.now()
-  });*/
+    $.post(
+      APIURL + "fetchFiles",
+      { username: "dev", password: "MeowOS" },
+      receiveFiles
+    );
 
-    socket.on("receiveFiles", (f) => {
-      console.log(f);
-      if (f.error) return;
-      setFiles(f.files, f.files[0].path.replace("/", "").includes("/"));
-    });
+    /*
+      socket.emit("writeFile", {
+        auth: { username: "dev", password: "MeowOS" },
+        path: "/file.txt",
+        content: "Test: " + Date.now()
+      });
+    */
   },
   {
     formattedName: "Files",
