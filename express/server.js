@@ -6,6 +6,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const APIURL = "http://host.phlamedev.com:6077/";
+app.use(bodyParser.json());
+app.use(bp.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+router.use(bp.urlencoded({ extended: true }));
 
 const router = express.Router();
 /*router.get("/script.js", (req, res) => {
@@ -23,7 +27,6 @@ router.post("fetchFiles", (req, res) => {
   res.json({ error: "NONE" });
 });
 
-app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
 
 module.exports = app;
