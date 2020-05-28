@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const router = express.Router();
 router.get("/script.js", (req, res) => {
-  res.sendFile("./script.js");
+  res.sendFile("/express/script.js");
 });
 
 app.use(bodyParser.json());
