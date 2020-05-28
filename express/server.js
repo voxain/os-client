@@ -26,14 +26,14 @@ const router = express.Router();
   res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
 });*/
 router.post("fetchFiles", (req, res) => {
-  /*axios
+  axios
     .post(APIURL + "fetchFiles", req.body)
     .then((resp) => {
       res.json(resp || {});
     })
     .catch((error) => {
       console.error(error);
-    });*/
+    });
 });
 
 app.use("/.netlify/functions/server", router); // path must route to lambda
