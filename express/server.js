@@ -6,12 +6,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 const APIURL = "http://host.phlamedev.com:6077/";
-//const axios = require("axios");
+const axios = require("axios");
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: true }));
+//router.use(bodyParser.urlencoded({ extended: true }));
 
 const router = express.Router();
 /*router.get("/script.js", (req, res) => {
