@@ -7,7 +7,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const router = express.Router();
-router.get("/", (req, res) => {
+router.get("*", (req, res) => {
   res.send("Hello.");
 });
 
