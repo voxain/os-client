@@ -29,7 +29,7 @@ router.post("/fetchFiles", (req, res) => {
   axios
     .post(APIURL + "fetchFiles", req.body)
     .then((resp) => {
-      res.json(resp || {});
+      res.send(resp || {});
     })
     .catch((error) => {
       console.error(error);
