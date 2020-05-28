@@ -152,6 +152,18 @@ let Login = function () {
     return (_("overlay-login-error").innerHTML = "Please enter a username.");
   if (!password)
     return (_("overlay-login-error").innerHTML = "Please enter a password.");
+
+  $.post(
+    APIURL + "login",
+    { username: username, password: password },
+    function (data) {
+      if (data.error)
+        return (_("overlay-login-error").innerHTML = LoginErrors[data.error]);
+
+      console.log(data.token);
+      _("overlay").remove();
+    }
+  );
 };
 
 _("overlay-login-enter").onclick = Login;
