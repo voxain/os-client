@@ -21,7 +21,7 @@ let filesystem = new Program(
       },
     ];
 
-    let receiveFiles = function () {
+    let receiveFiles = function (f) {
       console.log(f);
       if (f.error) return;
       setFiles(f.files, f.files[0].path.replace("/", "").includes("/"));
