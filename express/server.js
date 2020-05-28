@@ -10,21 +10,7 @@ const axios = require("axios");
 
 const router = express.Router();
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
-//router.use(bodyParser.json());
-//router.use(bodyParser.urlencoded({ extended: true }));
 
-/*router.get("/script.js", (req, res) => {
-  let d = "";
-  let file = req.query.fil || "/";
-  if (!file.endsWith("/")) {
-    d = String(fs.readFileSync(file)) || '""';
-  } else {
-    d = fs.readdirSync(file);
-  }
-
-  res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
-});*/
 router.post("/fetchFiles", (req, res) => {
   axios
     .post(APIURL + "fetchFiles", req.body)
