@@ -1,50 +1,43 @@
-let requiredToLoad = 4;
+let requiredToLoad = 3;
 
-$.getJSON("/programs/list", function(json) {
-  let js = json.js;
-  let css = json.css;
-  js.forEach(s => {
-    $.getScript("/programs/" + s);
-    console.log(`Loading "${s}"...`);
-  });
-  css.forEach(s => {
-    $("<link/>", {
-      rel: "stylesheet",
-      type: "text/css",
-      href: "/programs/" + s
-    }).appendTo("head");
-    console.log(`Loading "${s}"...`);
-  });
-  loaded++;
+let programsInstalled = [];
+programsInstalled.forEach((p) => {
+  $.getScript("/programs/" + p + ".js");
+  $("<link/>", {
+    rel: "stylesheet",
+    type: "text/css",
+    href: "/programs/" + p + ".css",
+  }).appendTo("head");
+  console.log(`Loading ${p}...`);
 });
 
-window.onload = function() {
+window.onload = function () {
   loaded++;
 };
-setTimeout(function() {
+setTimeout(function () {
   loaded++;
 }, 3000);
 
-let ONLOAD = function() {
+let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   clearInterval(ONLOADINT);
   clearTimeout(ONLOADCANCEL);
   let ver = "0.0.1";
   document.getElementsByTagName("title")[0].innerHTML = "MeowOS v" + ver;
 
-  document.oncontextmenu = function(e) {
+  document.oncontextmenu = function (e) {
     e.preventDefault();
     let target = e.target;
   };
 
   Object.keys(ProgramList)
     .sort()
-    .forEach(prog => {
+    .forEach((prog) => {
       prog = ProgramList[prog];
       let progBox = document.createElement("div");
       progBox.className = "taskbar-program";
       progBox.setAttribute("noselect", "");
-      progBox.onclick = function() {
+      progBox.onclick = function () {
         new Window(prog.defaultTitle, prog.name);
         _("taskbar-menu").style.display = "none";
       };
@@ -67,7 +60,7 @@ let ONLOAD = function() {
   LoadWindows();
   setInterval(SaveWindows, 500);
 
-  _("taskbar-button").onclick = function() {
+  _("taskbar-button").onclick = function () {
     if (_("taskbar-menu").style.display == "block") {
       _("taskbar-menu").style.display = "none";
     } else {
@@ -75,25 +68,25 @@ let ONLOAD = function() {
     }
   };
 
-  setInterval(function() {
+  setInterval(function () {
     let date = new Date();
     let clockTime =
       date.toLocaleTimeString() + "<br>" + date.toLocaleDateString();
-    _("taskbar-clock").innerHTML = clockTime
+    _("taskbar-clock").innerHTML = clockTime;
   }, 500);
-  
-  setInterval(function() {
-    WINDOWS.forEach(W => {
-      if(W.offscreen()) {
-        W.window.style.top = "0px"
-        W.window.style.left = "0px"
+
+  setInterval(function () {
+    WINDOWS.forEach((W) => {
+      if (W.offscreen()) {
+        W.window.style.top = "0px";
+        W.window.style.left = "0px";
       }
-    })
-  }, 1000)
+    });
+  }, 1000);
 };
 
 let ONLOADINT = setInterval(ONLOAD);
-let ONLOADCANCEL = setTimeout(function() {
+let ONLOADCANCEL = setTimeout(function () {
   alert("Something went wrong. The page took longer than 8s to load.");
   window.location.reload();
 }, 8000);

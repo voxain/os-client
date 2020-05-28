@@ -19,6 +19,9 @@ const router = express.Router();
 
   res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
 });*/
+router.post("api", (req, res) => {
+  res.json({ error: "NONE" });
+});
 
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
