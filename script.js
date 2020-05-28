@@ -91,4 +91,4 @@ let ONLOADCANCEL = setTimeout(function () {
   window.location.reload();
 }, 8000);
 
-_("overlay").display = "none";
+_("overlay").style.display = "none";
