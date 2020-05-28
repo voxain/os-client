@@ -5,7 +5,7 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const APIURL = "";
+const APIURL = "http://host.phlamedev.com:6077/";
 
 const router = express.Router();
 /*router.get("/script.js", (req, res) => {
