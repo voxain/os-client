@@ -4,10 +4,11 @@ const path = require("path");
 const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
+const fs = require("fs");
 
 const router = express.Router();
 router.get("/script.js", (req, res) => {
-  res.sendFile("/express/script.js");
+  res.send(String(fs.readFileSync("./script.js")));
 });
 
 app.use(bodyParser.json());
