@@ -6,6 +6,7 @@ var rand = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 window.WINDOWS = [];
+window.APIURL = "/.netlify/functions/server/";
 
 let MakeWindowsInteractive = function () {
   $("window").draggable({
