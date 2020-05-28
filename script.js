@@ -1,6 +1,6 @@
 let requiredToLoad = 3;
 
-let programsInstalled = ["html", "calculator"];
+let programsInstalled = ["html", "calculator", "filesystem"];
 programsInstalled.forEach((p) => {
   $.getScript("/programs/" + p + ".js");
   $("<link/>", {
