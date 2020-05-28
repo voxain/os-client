@@ -82,8 +82,8 @@ body {
 #taskbar-menu .taskbar-program .taskbar-program-icon {
   display: inline;
   box-sizing: border-box;
-  width: 36px;
-  height: 36px;
+  /*width: 36px;
+  height: 36px;*/
   vertical-align: middle;
 }
 #taskbar-menu .taskbar-program .taskbar-program-title {
