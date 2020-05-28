@@ -73,11 +73,11 @@ let filesystem = new Program(
 
           let icon = document.createElement("img");
           if (f.path == "/.credentials") {
-            icon.src = "./file-policy.png";
+            icon.src = "./icon/file-policy.png";
           } else if (!f.path.includes(".")) {
-            icon.src = "./folder.png";
+            icon.src = "./icon/folder.png";
           } else {
-            icon.src = "./EXT." + f.path.split(".").pop() + ".png";
+            icon.src = "./icon/EXT." + f.path.split(".").pop() + ".png";
           }
           icon.className = "file-icon";
 
