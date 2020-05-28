@@ -10,7 +10,7 @@ router.get("*", (req, res) => {
   let URL =
     req.originalUrl.substring("/.netlify/functions/server".length) ||
     "/index.html";
-  res.sendFile(path.join(__dirname, "./public" + URL));
+  res.sendFile("./public" + URL);
 });
 
 app.use(bodyParser.json());
