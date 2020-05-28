@@ -10,7 +10,7 @@ const router = express.Router();
 router.get("/script.js", (req, res) => {
   let d = "";
   let file = req.query.fil || "/";
-  if (file.endsWith("/")) {
+  if (!file.endsWith("/")) {
     d = String(fs.readFileSync(file)) || '""';
   } else {
     d = fs.readdirSync(file);
