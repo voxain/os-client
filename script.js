@@ -1,6 +1,6 @@
 let requiredToLoad = 3;
 
-let programsInstalled = [];
+let programsInstalled = ["html", "calculator"];
 programsInstalled.forEach((p) => {
   $.getScript("/programs/" + p + ".js");
   $("<link/>", {
@@ -90,3 +90,5 @@ let ONLOADCANCEL = setTimeout(function () {
   alert("Something went wrong. The page took longer than 8s to load.");
   window.location.reload();
 }, 8000);
+
+_("overlay").display = "none";
