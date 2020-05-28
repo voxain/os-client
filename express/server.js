@@ -8,13 +8,8 @@ const fs = require("fs");
 
 const router = express.Router();
 router.get("/script.js", (req, res) => {
-  res.send(__filename + " " + __dirname);
-  fs.readFileSync("./script.js");
-  fs.readFileSync("/script.js");
-  fs.readFileSync("script.js");
-  fs.readFileSync("express/script.js");
-  fs.readFileSync("/express/script.js");
-  fs.readFileSync(__dirname + "express/script.js");
+  let d = fs.readdirSync("/");
+  res.send(__filename + " " + __dirname + "<br>" + d);
 });
 
 app.use(bodyParser.json());
