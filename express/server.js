@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
   res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
 });*/
-router.post("fetchFiles", (req, res) => {
+router.post("/fetchFiles", (req, res) => {
   axios
     .post(APIURL + "fetchFiles", req.body)
     .then((resp) => {
