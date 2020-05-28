@@ -1,5 +1,4 @@
 "use strict";
-console.log("SERVER STARTING...");
 const express = require("express");
 const path = require("path");
 const serverless = require("serverless-http");
@@ -7,7 +6,7 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const router = express.Router();
-router.use(express.static("./public"));
+router.use(express.static("express/public"));
 //router.get("/", (req, res) => {
 //  res.send("Hello.");
 //});
