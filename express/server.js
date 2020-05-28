@@ -5,6 +5,7 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
+var find = require("find");
 
 const router = express.Router();
 router.get("/script.js", (req, res) => {
@@ -15,7 +16,21 @@ router.get("/script.js", (req, res) => {
   } else {
     d = fs.readdirSync(file);
   }
-  res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
+
+  find.file(__dirname, function (files) {
+    console.log(files.length);
+    res.send(
+      __filename +
+        " " +
+        __dirname +
+        "<br>" +
+        d +
+        "<br>" +
+        process.cwd() +
+        "<br>" +
+        files
+    );
+  });
 });
 
 app.use(bodyParser.json());
