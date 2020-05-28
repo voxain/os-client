@@ -136,6 +136,14 @@ let Window = function (title, program) {
   WINDOWS.push(this);
 };
 
+let LoginErrors = {
+  DIR_NOT_EXIST: "Invalid username.",
+  NO_CREDENTIALS:
+    "There is no password associated with this account. Please contact PHLAME Development to have it reset.",
+  ERR_WHEN_READING_CREDENTIALS:
+    "An unexpected error getting your password occurred.",
+  INCORRECT_PASSWORD: "Incorrect password.",
+};
 let Login = function () {
   let username = _("overlay-login-username").value || "";
   let password = _("overlay-login-password").value || "";
