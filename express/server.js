@@ -5,7 +5,6 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
-var find = require("find");
 
 const router = express.Router();
 /*router.get("/script.js", (req, res) => {
