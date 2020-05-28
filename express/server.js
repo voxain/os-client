@@ -5,6 +5,7 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const APIURL = "";
 
 const router = express.Router();
 /*router.get("/script.js", (req, res) => {
@@ -18,7 +19,7 @@ const router = express.Router();
 
   res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
 });*/
-router.post("api", (req, res) => {
+router.post("fetchFiles", (req, res) => {
   res.json({ error: "NONE" });
 });
 
