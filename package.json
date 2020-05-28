@@ -28,6 +28,6 @@
     "netlify-lambda": "^1.6.3",
     "nodemon": "^1.19.2",
     "serverless-http": "^2.3.0",
-    "find": "^0.3.0"
+    "axios": "^0.19.2"
   }
 }
