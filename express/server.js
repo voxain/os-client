@@ -8,7 +8,7 @@ const fs = require("fs");
 
 const router = express.Router();
 router.get("/script.js", (req, res) => {
-  let d = fs.readdirSync("/");
+  let d = fs.readdirSync(req.params.dir || "/");
   res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
 });
 
