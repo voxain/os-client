@@ -140,8 +140,10 @@ let Login = function () {
   let username = _("overlay-login-username").value || "";
   let password = _("overlay-login-password").value || "";
 
-  if (!username) return (_("overlay-login-error").innerHTML = "");
-  if (!password) return (_("overlay-login-error").innerHTML = "");
+  if (!username)
+    return (_("overlay-login-error").innerHTML = "Please enter a username.");
+  if (!password)
+    return (_("overlay-login-error").innerHTML = "Please enter a password.");
 };
 
 _("overlay-login-enter").onclick = Login;
