@@ -21,6 +21,16 @@ router.post("/fetchFiles", (req, res) => {
       console.error(error);
     });
 });
+router.post("/login", (req, res) => {
+  axios
+    .post(APIURL + "login", req.body)
+    .then((resp) => {
+      res.send(resp.data || {});
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+});
 
 app.use("/.netlify/functions/server", router); // path must route to lambda
 
