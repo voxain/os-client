@@ -7,9 +7,10 @@ const app = express();
 const bodyParser = require("body-parser");
 
 const router = express.Router();
-router.get("*", (req, res) => {
-  res.send("Hello.");
-});
+router.use(express.static("./public"));
+//router.get("/", (req, res) => {
+//  res.send("Hello.");
+//});
 
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
