@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 
 const router = express.Router();
 router.use(express.static("./public/"));
+router.get("/test", (req, res) => {
+  res.send("Hello.");
 });
 
 app.use(bodyParser.json());
