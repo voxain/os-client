@@ -9,9 +9,9 @@ const APIURL = "http://host.phlamedev.com:6077/";
 const axios = require("axios");
 
 app.use(bodyParser.json());
-app.use(bp.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-router.use(bp.urlencoded({ extended: true }));
+router.use(bodyParser.urlencoded({ extended: true }));
 
 const router = express.Router();
 /*router.get("/script.js", (req, res) => {
