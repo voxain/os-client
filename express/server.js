@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 const router = express.Router();
 router.get("/", (req, res) => {
-  res.sendFile(__dirname + "/express/public/index.html");
+  res.send(__dirname + "/express/public/index.html");
 });
 
 app.use(bodyParser.json());
