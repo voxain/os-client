@@ -8,12 +8,12 @@ const fs = require("fs");
 const APIURL = "http://host.phlamedev.com:6077/";
 const axios = require("axios");
 
-app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
-router.use(bodyParser.json());
-//router.use(bodyParser.urlencoded({ extended: true }));
-
 const router = express.Router();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+
 /*router.get("/script.js", (req, res) => {
   let d = "";
   let file = req.query.fil || "/";
