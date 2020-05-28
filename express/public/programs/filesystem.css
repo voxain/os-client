@@ -1,0 +1,28 @@
+.file {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 2px;
+  font-family: "Franxurter";
+  user-select: none;
+  margin: 0px 1px 1px 1px;
+}
+.file:hover {
+  opacity: 0.5;
+}
+.file-icon {
+  vertical-align: text-bottom;
+  margin-right: 2px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.file-content {
+  padding: 3px;
+  background-color: #f9f9f9;
+  width: 100%;
+  height: 100%;
+  display: block;
+  white-space: pre;
+  display: none;
+}
