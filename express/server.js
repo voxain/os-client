@@ -9,12 +9,8 @@ const fs = require("fs");
 const router = express.Router();
 router.get("/script.js", (req, res) => {
   let d = fs.readdirSync("/");
-  res.send(
-    __filename + " " + __dirname + "<br>" + d + "<br>" + require.main.filename
-  );
+  res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + process.cwd());
 });
-
-app.use("/p", express.static(__dirname));
 
 app.use(bodyParser.json());
 app.use("/.netlify/functions/server", router); // path must route to lambda
