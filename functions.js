@@ -1,28 +1,28 @@
 loaded++;
-var _ = function(id) {
+var _ = function (id) {
   return document.getElementById(id);
 };
-var rand = function(min, max) {
+var rand = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 window.WINDOWS = [];
 
-let MakeWindowsInteractive = function() {
+let MakeWindowsInteractive = function () {
   $("window").draggable({
     handle: ".window-title",
     containment: "document",
-    stack: "window"
+    stack: "window",
   });
   $("window:not([noresize])").resizable({
     containment: "document",
     handles: "all",
     minHeight: 50,
-    minWidth: 100
+    minWidth: 100,
   });
-  document.querySelectorAll(".window-close").forEach(close => {
-    close.onclick = function() {
+  document.querySelectorAll(".window-close").forEach((close) => {
+    close.onclick = function () {
       let newWINDOWS = [];
-      WINDOWS.forEach(w => {
+      WINDOWS.forEach((w) => {
         if (close.parentElement !== w.window) newWINDOWS.push(w);
       });
       WINDOWS = newWINDOWS;
@@ -31,9 +31,9 @@ let MakeWindowsInteractive = function() {
   });
 };
 
-let SaveWindows = function() {
+let SaveWindows = function () {
   let windows = [];
-  WINDOWS.forEach(w => {
+  WINDOWS.forEach((w) => {
     windows.push({
       left: w.window.style.left,
       top: w.window.style.top,
@@ -42,15 +42,15 @@ let SaveWindows = function() {
       zIndex: w.window.style["z-index"],
       title: w.title,
       program: w.program.name,
-      content: w.content.innerHTML
+      content: w.content.innerHTML,
     });
   });
 
   localStorage.setItem("windowStore", JSON.stringify(windows));
 };
-let LoadWindows = function() {
+let LoadWindows = function () {
   let windows = JSON.parse(localStorage.getItem("windowStore")) || [];
-  windows.forEach(w => {
+  windows.forEach((w) => {
     let win = new Window(w.title, w.program);
     win.window.style.top = w.top;
     win.window.style.left = w.left;
@@ -62,10 +62,10 @@ let LoadWindows = function() {
 };
 
 let ProgramList = {};
-let GetProgram = function(program) {
+let GetProgram = function (program) {
   return ProgramList[program.toLowerCase()] || {};
 };
-let Program = function(name, func, options) {
+let Program = function (name, func, options) {
   this.program = {
     eval: func,
     name: name.toLowerCase(),
@@ -76,12 +76,12 @@ let Program = function(name, func, options) {
     defaultHeight: options.defaultHeight || "",
     minWidth: options.minWidth || "",
     minHeight: options.minHeight || "",
-    noResize: options.noResize || false
+    noResize: options.noResize || false,
   };
   ProgramList[name.toLowerCase()] = this.program;
 };
 
-let Window = function(title, program) {
+let Window = function (title, program) {
   this.title = title;
   this.program = GetProgram(program);
 
@@ -116,12 +116,13 @@ let Window = function(title, program) {
   this.content = winContent;
   this.closeButton = winClose;
 
-  this.offscreen = function() {
+  this.offscreen = function () {
     var rect = this.window.getBoundingClientRect();
     return (
       rect.x + rect.width < 0 ||
       rect.y + rect.height < 0 ||
-      (rect.x > window.innerWidth || rect.y > window.innerHeight)
+      rect.x > window.innerWidth ||
+      rect.y > window.innerHeight
     );
   };
 
@@ -134,18 +135,18 @@ let Window = function(title, program) {
   WINDOWS.push(this);
 };
 
-let Login = function() {
+let Login = function () {
   let username = _("overlay-login-username").value || "";
   let password = _("overlay-login-password").value || "";
-  
-  if(!username) return _("overlay-login-error").innerHTML = ""
-  if(!password) return _("overlay-login-error").innerHTML = ""
+
+  if (!username) return (_("overlay-login-error").innerHTML = "");
+  if (!password) return (_("overlay-login-error").innerHTML = "");
 };
 
 _("overlay-login-enter").onclick = Login;
-_("overlay-login-username").onkeyup = function(e) {
+_("overlay-login-username").onkeyup = function (e) {
   if (e.key == "Enter") Login();
 };
-_("overlay-login-password").onkeyup = function(e) {
+_("overlay-login-password").onkeyup = function (e) {
   if (e.key == "Enter") Login();
 };

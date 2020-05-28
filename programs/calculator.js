@@ -1,6 +1,6 @@
 let calculator = new Program(
   "calculator",
-  win => {
+  (win) => {
     let calcHTML = `
 <div class="calc">
   <input class="calc-output" type="textbox">
@@ -32,8 +32,8 @@ let calculator = new Program(
 
     let calcE = new DOMParser().parseFromString(calcHTML, "text/html");
 
-    calcE.querySelectorAll(".calc-button").forEach(b => {
-      b.onclick = function() {
+    calcE.querySelectorAll(".calc-button").forEach((b) => {
+      b.onclick = function () {
         let result = b.parentElement.parentElement.parentElement.querySelector(
           ".calc-output"
         );
@@ -61,6 +61,6 @@ let calculator = new Program(
     defaultTitle: "Calculator",
     defaultWidth: "265px",
     defaultHeight: "390px",
-    noResize: true
+    noResize: true,
   }
 );
