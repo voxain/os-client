@@ -147,6 +147,8 @@ let LoginErrors = {
 let Login = function () {
   let username = _("overlay-login-username").value || "";
   let password = _("overlay-login-password").value || "";
+  let rememberUsername = _("remember-username").checked;
+  let rememberPassword = _("remember-password").checked;
 
   if (!username)
     return (_("overlay-login-error").innerHTML = "Please enter a username.");
@@ -162,6 +164,10 @@ let Login = function () {
 
       console.log(data.token);
       _("overlay").remove();
+      if (rememberUsername) localStorage.setItem("AUTH_USERNAME", username);
+      else localStorage.removeItem("AUTH_USERNAME");
+      if (rememberPassword) localStorage.setItem("AUTH_PASSWORD", password);
+      else localStorage.removeItem("AUTH_PASSWORD");
     }
   );
 };
