@@ -9,7 +9,9 @@ const fs = require("fs");
 const router = express.Router();
 router.get("/script.js", (req, res) => {
   let d = fs.readdirSync("/");
-  res.send(__filename + " " + __dirname + "<br>" + d + "<br>" + path.dirname());
+  res.send(
+    __filename + " " + __dirname + "<br>" + d + "<br>" + require.main.filename
+  );
 });
 
 app.use(bodyParser.json());
