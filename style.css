@@ -200,7 +200,7 @@ window {
 }
 #overlay-login-error {
   color: red;
-  font-size: 18px;
+  font-size: 12px;
 }
 #overlay-login-enter {
   padding: 6px;
