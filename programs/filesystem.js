@@ -36,8 +36,20 @@ new Program(
         list.id = "";
 
         if (backButton) {
-          let back = document.createElement("button");
-          back.innerHTML = "Back";
+          grey = true;
+          let back = document.createElement("div");
+          back.className = "file";
+          back.style.cursor = "pointer";
+
+          let icon = document.createElement("img");
+          icon.src = "./icon/folder.png";
+          icon.className = "file-icon";
+          back.appendChild(icon);
+
+          let data = document.createElement("span");
+          data.innerHTML = "..";
+          back.appendChild(data);
+
           back.onclick = function () {
             $.post(
               APIURL + "fetchFiles",
