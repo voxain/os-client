@@ -157,8 +157,9 @@ let Window = function (title, program, pass) {
     );
   };
 
+  let _this = this;
   this.sizeInterval = setInterval(function () {
-    win.content.style.height = win.offsetHeight - 20 + "px";
+    _this.content.style.height = _this.window.offsetHeight - 20 + "px";
   });
 
   try {
