@@ -24,8 +24,34 @@ new Program(
         menu1.innerHTML = "New File";
         menu1.onclick = function () {};
         menu.appendChild(menu1);
+
+        let menu2 = document.createElement("div");
+        menu2.className = "context-menu-button";
+        menu2.innerHTML = "New Folder";
+        menu2.onclick = function () {};
+        menu.appendChild(menu2);
       } else {
-        console.log("ON FILE");
+        let menu = _("context-menu");
+        menu.style.display = "block";
+        menu.innerHTML = "";
+
+        let menu1 = document.createElement("div");
+        menu1.className = "context-menu-button";
+        menu1.innerHTML = "Edit File";
+        menu1.onclick = function () {};
+        menu.appendChild(menu1);
+
+        let menu2 = document.createElement("div");
+        menu2.className = "context-menu-button";
+        menu2.innerHTML = "Move File";
+        menu2.onclick = function () {};
+        menu.appendChild(menu2);
+
+        let menu3 = document.createElement("div");
+        menu3.className = "context-menu-button";
+        menu3.innerHTML = "Delete File";
+        menu3.onclick = function () {};
+        menu.appendChild(menu3);
       }
       console.log(e);
     };
