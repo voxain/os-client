@@ -15,10 +15,10 @@ new Program(
         e.target.className !== "file-icon" &&
         e.target.className !== "file-path"
       ) {
-        let menu = fileList.parentElement.querySelector(".file-contextmenu");
+        let menu = _("context-menu");
         menu.style.display = "block";
-        menu.style.top = e.offsetY + "px";
-        menu.style.left = e.offsetX + "px";
+        menu.style.top = e.clientY + "px";
+        menu.style.left = e.clientX + "px";
         menu.innerHTML = "";
 
         let menu1 = document.createElement("div");
@@ -33,10 +33,6 @@ new Program(
     };
 
     content.appendChild(fileList);
-
-    let menu = document.createElement("div");
-    menu.className = "file-contextmenu";
-    content.appendChild(menu);
 
     let files = [
       {
