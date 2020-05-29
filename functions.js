@@ -157,6 +157,10 @@ let Window = function (title, program, pass) {
     );
   };
 
+  this.sizeInterval = setInterval(function () {
+    win.content.style.height = win.offsetHeight - 20 + "px";
+  });
+
   try {
     this.program.eval(this.window, pass);
   } catch (e) {
