@@ -193,7 +193,7 @@ let Login = function () {
     return (_("overlay-login-error").innerHTML = "Please enter a password.");
 
   let oldHTML = _("overlay-login-enter").innerHTML;
-  _("overlay-login-enter").innerHTML = `<span class="dot-shuttle"></span>`;
+  _("overlay-login-enter").innerHTML = `<img alt="" src="./loading.gif">`;
 
   $.post(
     APIURL + "login",
