@@ -33,8 +33,8 @@ _("overlay-login-username").select();
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   clearInterval(ONLOADINT);
-  let ver = "0.0.1";
-  document.getElementsByTagName("title")[0].innerHTML = "MeowOS v" + ver;
+  let ver = "0.0.2";
+  document.getElementsByTagName("title")[0].innerHTML = "PHLAME_OS v" + ver;
 
   document.oncontextmenu = function (e) {
     e.preventDefault();
