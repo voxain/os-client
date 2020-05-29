@@ -71,3 +71,20 @@ CodeMirrorThemes.forEach((t) => {
   }).appendTo("head");
   console.log(`Loading ${t}...`);
 });
+let CodeMirrorModes = {
+  css: "css",
+  go: "go",
+  htmlmixed: "html",
+  javascript: "js",
+  lua: "lua",
+  markdown: "md",
+  php: "php",
+  python: "py",
+  sql: "sql",
+  xml: "xml",
+  yaml: "yaml",
+};
+Object.keys(CodeMirrorModes).forEach((t) => {
+  $.getScript("/codemirror/lang/" + t + ".js");
+  console.log(`Loading ${t}...`);
+});
