@@ -12,6 +12,8 @@ new Program(
       e.preventDefault();
       let menu = fileList.parentElement.querySelector(".file-contextmenu");
       menu.style.display = "block";
+      menu.style.top = e.pageY;
+      menu.style.left = e.pageX;
       console.log(e);
     };
 
