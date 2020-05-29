@@ -62,6 +62,9 @@ new Program(
           let icon = document.createElement("img");
           icon.src = "./icon/folder.png";
           icon.className = "file-icon";
+          icon.onerror = function () {
+            icon.src = "./icon/generic-document.png";
+          };
           back.appendChild(icon);
 
           let data = document.createElement("span");
