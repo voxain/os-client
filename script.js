@@ -21,7 +21,10 @@ setTimeout(function () {
 let storedUsername = localStorage.getItem("usernameStore");
 if (storedUsername) _("overlay-login-username").value = storedUsername;
 let storedPassword = localStorage.getItem("passwordStore");
-if (storedPassword) _("overlay-login-password").value = storedPassword;
+if (storedPassword) {
+  _("overlay-login-password").value = storedPassword;
+  _("remember-password").click();
+}
 
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
