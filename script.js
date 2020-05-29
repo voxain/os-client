@@ -37,10 +37,7 @@ let ONLOAD = function () {
   document.getElementsByTagName("title")[0].innerHTML = "PHLAME_OS v" + ver;
 
   document.onclick = function (e) {
-    if (
-      e.target.id !== "context-menu" &&
-      e.target.className !== "context-menu-button"
-    )
+    if (e.target.id !== "context-menu")
       _("context-menu").style.display = "none";
   };
   document.oncontextmenu = function (e) {
