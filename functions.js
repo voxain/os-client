@@ -179,3 +179,8 @@ _("overlay-login-username").onkeyup = function (e) {
 _("overlay-login-password").onkeyup = function (e) {
   if (e.key == "Enter") Login();
 };
+
+_("overlay-login-create").onclick = function () {
+  _("overlay-login").style.display = "none";
+  _("overlay-create").style.display = "block";
+};
