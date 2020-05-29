@@ -15,11 +15,12 @@ new Program(
         e.target.className !== "file-icon" &&
         e.target.className !== "file-path"
       ) {
-      } else {
         let menu = fileList.parentElement.querySelector(".file-contextmenu");
         menu.style.display = "block";
-        menu.style.top = e.clientY + "px";
-        menu.style.left = e.clientX + "px";
+        menu.style.top = e.offsetY + "px";
+        menu.style.left = e.offsetX + "px";
+      } else {
+        console.log("ON FILE");
       }
       console.log(e);
     };
@@ -135,6 +136,7 @@ new Program(
           icon.className = "file-icon";
 
           let data = document.createElement("span");
+          data.className = "file-path";
           data.innerHTML = f.path;
 
           info.appendChild(icon);
