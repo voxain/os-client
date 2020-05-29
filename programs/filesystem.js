@@ -74,7 +74,7 @@ new Program(
         fs.forEach((f) => {
           let info = document.createElement("div");
           info.className = "file";
-          if (grey) info.style["background-color"] = "#f9f9f9";
+          if (grey) info.style["background-color"] = "#f1f1f1";
           info.style.cursor = "pointer";
 
           info.onclick = function () {
