@@ -38,8 +38,8 @@ let SaveWindows = function () {
     windows.push({
       left: w.window.style.left,
       top: w.window.style.top,
-      width: w.window.style.width || w.window.offsetWidth,
-      height: w.window.style.height || w.window.offsetWidth,
+      width: w.window.style.width || w.window.offsetWidth + "px",
+      height: w.window.style.height || w.window.offsetHeight + "px",
       zIndex: w.window.style["z-index"],
       title: w.title,
       program: w.program.name,
