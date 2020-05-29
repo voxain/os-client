@@ -38,7 +38,6 @@ let ONLOAD = function () {
 
   document.oncontextmenu = function (e) {
     e.preventDefault();
-    let target = e.target;
   };
 
   SetPrograms();
