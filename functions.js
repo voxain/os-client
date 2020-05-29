@@ -225,6 +225,10 @@ _("overlay-login-password").onkeyup = function (e) {
 };
 
 _("overlay-login-create").onclick = function () {
-  _("overlay-login").style.display = "none";
-  _("overlay-create").style.display = "block";
+  $("#overlay-login").fadeOut(400);
+  $("#overlay-create").fadeIn(400);
+};
+_("overlay-create-login").onclick = function () {
+  $("#overlay-create").fadeOut(400);
+  $("#overlay-login").fadeIn(400);
 };
