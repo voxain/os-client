@@ -2,17 +2,11 @@ new Program(
   "filesystem",
   (win) => {
     let content = win.querySelector(".window-content");
-    content.style["padding-top"] = "1px";
     content.style.overflow = "auto";
 
     let fileList = document.createElement("div");
     fileList.className = "file-list";
     content.appendChild(fileList);
-
-    let fileContent = document.createElement("div");
-    fileContent.className = "file-content";
-    fileContent.innerHTML = `Error`;
-    content.appendChild(fileContent);
 
     let files = [
       {
