@@ -17,8 +17,6 @@ new Program(
       ) {
         let menu = _("context-menu");
         menu.style.display = "block";
-        menu.style.top = e.clientY + "px";
-        menu.style.left = e.clientX + "px";
         menu.innerHTML = "";
 
         let menu1 = document.createElement("div");
