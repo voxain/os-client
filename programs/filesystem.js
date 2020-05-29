@@ -3,10 +3,23 @@ new Program(
   (win) => {
     let content = win.querySelector(".window-content");
     content.style.overflow = "auto";
+    content.style.position = "relative";
 
     let fileList = document.createElement("div");
     fileList.className = "file-list";
+
+    fileList.oncontextmenu = function (e) {
+      e.preventDefault();
+      let menu = fileList.parentElement.querySelector(".file-contextmenu");
+      menu.style.display = "block";
+      console.log(e);
+    };
+
     content.appendChild(fileList);
+
+    let menu = document.createElement("div");
+    menu.className = "file-contextmenu";
+    content.appendChild(menu);
 
     let files = [
       {
@@ -70,6 +83,10 @@ new Program(
           info.className = "file";
           if (grey) info.style["background-color"] = "#f1f1f1";
           info.style.cursor = "pointer";
+
+          info.oncontextmenu = function (e) {
+            e.preventDefault();
+          };
 
           info.onclick = function () {
             if (!f.path.includes(".")) {
