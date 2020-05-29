@@ -20,7 +20,8 @@ new Program(
       mode: editorMode,
       value: passed.value || "",
     });
-    editor.display.wrapper.id = "code-box";
+    editor.display.wrapper.className = "codemirror-box";
+    console.log(editor, editorMode, passed);
   },
   {
     formattedName: "CodeMirror",
