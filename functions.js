@@ -82,6 +82,7 @@ let Program = function (name, func, options) {
   ProgramList[name.toLowerCase()] = this.program;
 };
 let SetPrograms = function () {
+  _("taskbar-menu").innerHTML = "";
   Object.keys(ProgramList)
     .sort()
     .forEach((prog) => {
