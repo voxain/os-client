@@ -36,7 +36,15 @@ let ONLOAD = function () {
   let ver = "0.1.0";
   document.getElementsByTagName("title")[0].innerHTML = "PHLAME_OS v" + ver;
 
+  document.onclick = function (e) {
+    if (
+      e.target.id !== "context-menu" &&
+      e.target.className !== "context-menu-button"
+    )
+      _("context-menu").style.display = "none";
+  };
   document.oncontextmenu = function (e) {
+    if (e.target.tagName == "INPUT" || e.target.tagName == "TEXTAREA") return;
     e.preventDefault();
     let menu = _("context-menu");
     menu.style.top = e.clientY + "px";
