@@ -111,9 +111,10 @@ let SetPrograms = function () {
     });
 };
 
-let Window = function (title, program) {
+let Window = function (title, program, pass) {
   this.title = title;
   this.program = GetProgram(program);
+  this.passedData = pass;
 
   let win = document.createElement("window");
   win.style.position = "absolute";
@@ -157,7 +158,7 @@ let Window = function (title, program) {
   };
 
   try {
-    this.program.eval(this.window);
+    this.program.eval(this.window, pass);
   } catch (e) {
     this.content.innerHTML = "Error.";
   }

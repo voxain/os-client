@@ -92,8 +92,10 @@ new Program(
               console.log(f.path.substring(1));
               list.innerHTML = "Loading...";
             } else {
-              let fContentWindow = new Window(f.path, "html");
-              fContentWindow.content.innerHTML = f.content;
+              let fContentWindow = new Window(f.path, "codemirror", {
+                value: f.content,
+                fileExt: f.path.split(".").pop(),
+              });
             }
           };
 
