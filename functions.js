@@ -165,6 +165,8 @@ let Window = function (title, program) {
   WINDOWS.push(this);
 };
 
+let Auth = {};
+
 let LoginErrors = {
   DIR_NOT_EXIST: "Invalid username.",
   NO_CREDENTIALS:
@@ -191,7 +193,12 @@ let Login = function () {
       if (data.error)
         return (_("overlay-login-error").innerHTML = LoginErrors[data.error]);
 
-      console.log(data.token);
+      Auth = {
+        username: username,
+        password: password,
+        token: data.token,
+      };
+
       _("overlay").remove();
       if (rememberUsername) localStorage.setItem("usernameStore", username);
       else localStorage.removeItem("usernameStore");
