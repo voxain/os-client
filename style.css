@@ -215,6 +215,7 @@ window {
   background-color: #1976d2;
   border-radius: 6px;
   cursor: pointer;
+  font-family: "nevis Bold";
 }
 #overlay-login-enter:hover {
   background-color: #1361af;
