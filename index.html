@@ -40,13 +40,13 @@
   </head>
   <body>
     <div id="overlay">
-      <div id="overlay-login">
+      <div id="overlay-login" noselect>
         <img
           noselect
           src="https://cdn.glitch.com/b6d52372-2e8c-4b3d-8647-ad05f3463666%2FCoolM.png?v=1590613149894"
           alt="M"
         />
-        <div id="overlay-login-title" noselect>Welcome!</div>
+        <div id="overlay-login-title">Welcome!</div>
         <input
           id="overlay-login-username"
           placeholder="Username"
@@ -59,20 +59,16 @@
           type="password"
         /><br />
         <label
-          ><input
-            type="checkbox"
-            id="remember-username"
-            checked
-            noselect
-          />Remember Username</label
+          ><input type="checkbox" id="remember-username" checked />Remember
+          Username</label
         ><br />
         <label
-          ><input type="checkbox" id="remember-password" noselect />Remember
+          ><input type="checkbox" id="remember-password" />Remember
           Password</label
         ><br />
         <div id="overlay-login-error"></div>
         <br />
-        <button id="overlay-login-enter" noselect>
+        <button id="overlay-login-enter">
           Login
         </button>
       </div>
