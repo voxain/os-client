@@ -18,14 +18,8 @@ new Program(
       theme: "liquibyte",
       tabSize: 2,
       mode: editorMode,
-      value: passed.value || "",
     });
-    console.log(
-      editor,
-      editorMode,
-      passed,
-      Object.getOwnPropertyNames(CodeMirrorModes)
-    );
+    editor.setValue(passed.value || "");
   },
   {
     formattedName: "CodeMirror",
