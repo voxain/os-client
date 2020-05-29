@@ -51,6 +51,7 @@
           id="overlay-login-username"
           placeholder="Username"
           type="text"
+          spellcheck="false"
         /><br />
         <input
           id="overlay-login-password"
@@ -58,16 +59,20 @@
           type="password"
         /><br />
         <label
-          ><input type="checkbox" id="remember-username" checked />Remember
-          Username</label
+          ><input
+            type="checkbox"
+            id="remember-username"
+            checked
+            noselect
+          />Remember Username</label
         ><br />
         <label
-          ><input type="checkbox" id="remember-password" />Remember
+          ><input type="checkbox" id="remember-password" noselect />Remember
           Password</label
         ><br />
         <div id="overlay-login-error"></div>
         <br />
-        <button id="overlay-login-enter">
+        <button id="overlay-login-enter" noselect>
           Login
         </button>
       </div>
