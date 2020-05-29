@@ -1,6 +1,6 @@
 let requiredToLoad = 3;
 
-let programsInstalled = ["html", "calculator", "filesystem"];
+let programsInstalled = ["html", "calculator", "filesystem", "codemirror"];
 requiredToLoad += programsInstalled.length;
 programsInstalled.forEach((p) => {
   $.getScript("/programs/" + p + ".js", function () {

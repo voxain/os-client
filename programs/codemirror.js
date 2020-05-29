@@ -10,7 +10,7 @@ new Program(
   },
   {
     formattedName: "CodeMirror",
-    icon: "https://img.icons8.com/fluent/48/000000/calculator.png",
+    icon: "https://codemirror.net/doc/logo.png",
     defaultTitle: "Untitled - CodeMirror",
   }
 );
