@@ -192,10 +192,15 @@ let Login = function () {
   if (!password)
     return (_("overlay-login-error").innerHTML = "Please enter a password.");
 
+  let oldHTML = _("overlay-login-enter").innerHTML;
+  _("overlay-login-enter").innerHTML = `<span class="dot-shuttle"></span>`;
+
   $.post(
     APIURL + "login",
     { username: username, password: password },
     function (data) {
+      _("overlay-login-enter").innerHTML = oldHTML;
+
       if (data.error)
         return (_("overlay-login-error").innerHTML = LoginErrors[data.error]);
 
