@@ -33,7 +33,6 @@ _("overlay-login-username").select();
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   clearInterval(ONLOADINT);
-  clearTimeout(ONLOADCANCEL);
   let ver = "0.0.1";
   document.getElementsByTagName("title")[0].innerHTML = "MeowOS v" + ver;
 
@@ -98,10 +97,5 @@ let ONLOAD = function () {
 };
 
 let ONLOADINT = setInterval(ONLOAD);
-let ONLOADCANCEL = setTimeout(function () {
-  alert("Something went wrong. The page took longer than 8s to load.");
-  window.location.reload();
-}, 8000);
-
 if (window.location.href.endsWith("?nologin=true"))
   _("overlay").style.display = "none";
