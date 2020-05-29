@@ -84,6 +84,7 @@ let CodeMirrorModes = {
   xml: "xml",
   yaml: "yaml",
 };
+requiredToLoad += Object.keys(CodeMirrorModes).length;
 Object.keys(CodeMirrorModes).forEach((t) => {
   $.getScript("/codemirror/lang/" + t + ".js");
   console.log(`Loading ${t}...`);
