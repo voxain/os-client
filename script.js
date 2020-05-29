@@ -38,6 +38,9 @@ let ONLOAD = function () {
 
   document.oncontextmenu = function (e) {
     e.preventDefault();
+    let menu = _("context-menu");
+    menu.style.top = e.clientY + "px";
+    menu.style.left = e.clientX + "px";
   };
 
   SetPrograms();
