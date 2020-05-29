@@ -1,5 +1,5 @@
 let CodeMirrorThemes = [
-  "3024-",
+  "3024-day",
   "3024-night",
   "abcdef",
   "ambiance-mobile",
@@ -69,7 +69,6 @@ CodeMirrorThemes.forEach((t) => {
     type: "text/css",
     href: "/codemirror/themes/" + t + ".css",
   }).appendTo("head");
-  console.log(`Loading ${t}...`);
 });
 let CodeMirrorModes = {
   css: "css",
@@ -89,5 +88,4 @@ Object.keys(CodeMirrorModes).forEach((t) => {
   $.getScript("/codemirror/lang/" + t + ".js", function () {
     loaded++;
   });
-  console.log(`Loading ${t}...`);
 });
