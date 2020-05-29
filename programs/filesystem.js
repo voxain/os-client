@@ -10,10 +10,16 @@ new Program(
 
     fileList.oncontextmenu = function (e) {
       e.preventDefault();
-      let menu = fileList.parentElement.querySelector(".file-contextmenu");
-      menu.style.display = "block";
-      menu.style.top = e.pageY;
-      menu.style.left = e.pageX;
+      if (
+        e.target.className !== "file" &&
+        e.target.className !== "file-icon" &&
+        e.target.className !== "file-path"
+      ) {
+        let menu = fileList.parentElement.querySelector(".file-contextmenu");
+        menu.style.display = "block";
+        menu.style.top = e.pageY + "px";
+        menu.style.left = e.pageX + "px";
+      }
       console.log(e);
     };
 
@@ -56,6 +62,7 @@ new Program(
           back.appendChild(icon);
 
           let data = document.createElement("span");
+          data.className = "file-path";
           data.innerHTML = "←";
           back.appendChild(data);
 
