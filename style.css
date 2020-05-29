@@ -279,6 +279,18 @@ window {
 #overlay-create-enter:hover {
   background-color: #c2185b;
 }
+#overlay-create-login {
+  padding: 6px;
+  width: 50px;
+  border: 1px solid black;
+  background-color: #1976d2;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "nevis Bold";
+}
+#overlay-create-login:hover {
+  background-color: #1361af;
+}
 
 #context-menu {
   box-sizing: border-box;
