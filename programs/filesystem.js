@@ -15,10 +15,11 @@ new Program(
         e.target.className !== "file-icon" &&
         e.target.className !== "file-path"
       ) {
+      } else {
         let menu = fileList.parentElement.querySelector(".file-contextmenu");
         menu.style.display = "block";
-        menu.style.top = e.pageY + "px";
-        menu.style.left = e.pageX + "px";
+        menu.style.top = e.clientY + "px";
+        menu.style.left = e.clientX + "px";
       }
       console.log(e);
     };
