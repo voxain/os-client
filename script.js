@@ -18,6 +18,11 @@ setTimeout(function () {
   loaded++;
 }, 3000);
 
+let storedUsername = localStorage.getItem("usernameStore", username);
+if (storedUsername) _("overlay-login-username").value = storedUsername;
+let storedPassword = localStorage.getItem("passwordStore", password);
+if (storedPassword) _("overlay-login-password").value = storedPassword;
+
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   clearInterval(ONLOADINT);
