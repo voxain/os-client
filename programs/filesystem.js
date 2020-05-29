@@ -19,6 +19,13 @@ new Program(
         menu.style.display = "block";
         menu.style.top = e.offsetY + "px";
         menu.style.left = e.offsetX + "px";
+        menu.innerHTML = "";
+
+        let menu1 = document.createElement("div");
+        menu1.className = "file-contextmenu-button";
+        menu1.innerHTML = "New File";
+        menu1.onclick = function () {};
+        menu.appendChild(menu1);
       } else {
         console.log("ON FILE");
       }
