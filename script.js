@@ -22,7 +22,6 @@ let storedUsername = localStorage.getItem("usernameStore");
 if (storedUsername) _("overlay-login-username").value = storedUsername;
 let storedPassword = localStorage.getItem("passwordStore");
 if (storedPassword) _("overlay-login-password").value = storedPassword;
-if (storedUsername && storedPassword) _("overlay-login-enter").click();
 
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
