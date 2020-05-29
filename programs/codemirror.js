@@ -1,9 +1,11 @@
 new Program(
   "codemirror",
   (win, passed) => {
+    let passed = passed || {};
+
     let textarea = document.createElement("textarea");
     textarea.className = "codemirror-textarea";
-    win.querySelector(".win-content").appendChild(textarea);
+    win.querySelector(".window-content").appendChild(textarea);
 
     let editorMode;
     if (Object.getOwnPropertyNames(CodeMirrorModes).includes(passed.fileExt))
@@ -17,7 +19,6 @@ new Program(
       value: passed.value || "",
     });
     editor.display.wrapper.id = "code-box";
-    editor.mode = "javascript";
   },
   {
     formattedName: "CodeMirror",
