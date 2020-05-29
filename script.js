@@ -1,8 +1,11 @@
 let requiredToLoad = 3;
 
 let programsInstalled = ["html", "calculator", "filesystem"];
+requiredToLoad += programsInstalled.length;
 programsInstalled.forEach((p) => {
-  $.getScript("/programs/" + p + ".js");
+  $.getScript("/programs/" + p + ".js", function () {
+    loaded++;
+  });
   $("<link/>", {
     rel: "stylesheet",
     type: "text/css",
