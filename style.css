@@ -199,6 +199,9 @@ window {
   width: 250px;
   margin-bottom: 4px;
 }
+#overlay-login label {
+  cursor: pointer;
+}
 #overlay-login-error {
   color: red;
   font-size: 12px;
