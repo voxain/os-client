@@ -235,6 +235,9 @@ window {
 #overlay-login-create:hover {
   background-color: #c2185b;
 }
+#overlay-login .loading-icon {
+  height: 70%;
+}
 
 #overlay-create {
   display: none;
