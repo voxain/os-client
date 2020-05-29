@@ -266,13 +266,13 @@ window {
 }
 #overlay-create-enter {
   padding: 6px;
-  width: 50px;
+  width: 55px;
   border: 1px solid black;
-  background-color: #1976d2;
+  background-color: #e91e63;
   border-radius: 6px;
   cursor: pointer;
   font-family: "nevis Bold";
 }
 #overlay-create-enter:hover {
-  background-color: #1361af;
+  background-color: #c2185b;
 }
