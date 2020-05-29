@@ -164,10 +164,10 @@ let Login = function () {
 
       console.log(data.token);
       _("overlay").remove();
-      if (rememberUsername) localStorage.setItem("AUTH_USERNAME", username);
-      else localStorage.removeItem("AUTH_USERNAME");
-      if (rememberPassword) localStorage.setItem("AUTH_PASSWORD", password);
-      else localStorage.removeItem("AUTH_PASSWORD");
+      if (rememberUsername) localStorage.setItem("usernameStore", username);
+      else localStorage.removeItem("usernameStore");
+      if (rememberPassword) localStorage.setItem("passwordStore", password);
+      else localStorage.removeItem("passwordStore");
     }
   );
 };
