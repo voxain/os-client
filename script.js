@@ -25,6 +25,7 @@ if (storedPassword) {
   _("overlay-login-password").value = storedPassword;
   _("remember-password").click();
 }
+_("overlay-login-username").select();
 
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
