@@ -8,7 +8,7 @@ new Program(
     win.querySelector(".window-content").appendChild(textarea);
 
     let editorMode;
-    if (Object.getOwnPropertyNames(CodeMirrorModes).includes(passed.fileExt))
+    if (Object.values(CodeMirrorModes).includes(passed.fileExt))
       Object.keys(CodeMirrorModes).forEach((m) => {
         if (CodeMirrorModes[m] == passed.fileExt) editorMode = m;
       });
