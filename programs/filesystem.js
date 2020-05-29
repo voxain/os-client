@@ -20,7 +20,7 @@ new Program(
         menu.innerHTML = "";
 
         let menu1 = document.createElement("div");
-        menu1.className = "file-contextmenu-button";
+        menu1.className = "context-menu-button";
         menu1.innerHTML = "New File";
         menu1.onclick = function () {};
         menu.appendChild(menu1);
@@ -63,7 +63,7 @@ new Program(
           icon.src = "./icon/folder.png";
           icon.className = "file-icon";
           icon.onerror = function () {
-            icon.src = "./icon/generic-document.png";
+            this.src = "./icon/generic-document.png";
           };
           back.appendChild(icon);
 
