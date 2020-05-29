@@ -205,7 +205,9 @@ let Login = function () {
         token: data.token,
       };
 
-      _("overlay").remove();
+      $("#overlay").fadeOut(500, function () {
+        $("#overlay").remove();
+      });
       if (rememberUsername) localStorage.setItem("usernameStore", username);
       else localStorage.removeItem("usernameStore");
       if (rememberPassword) localStorage.setItem("passwordStore", password);
