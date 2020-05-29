@@ -164,9 +164,9 @@ let Login = function () {
 
       console.log(data.token);
       _("overlay").remove();
-      if (rememberUsername) localStorage.setItem("usernameStore");
+      if (rememberUsername) localStorage.setItem("usernameStore", username);
       else localStorage.removeItem("usernameStore");
-      if (rememberPassword) localStorage.setItem("passwordStore");
+      if (rememberPassword) localStorage.setItem("passwordStore", password);
       else localStorage.removeItem("passwordStore");
     }
   );
