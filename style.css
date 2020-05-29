@@ -282,8 +282,8 @@ window {
   display: none;
   width: 150px;
   background-color: #747474;
-  border-radius: 12px;
-  padding: 6;
+  border-radius: 6px;
+  padding: 6px;
   position: absolute;
   z-index: 99999999;
 }
