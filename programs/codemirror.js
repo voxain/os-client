@@ -1,7 +1,7 @@
 new Program(
   "codemirror",
   (win, passed) => {
-    let passed = passed || {};
+    passed = passed || {};
 
     let textarea = document.createElement("textarea");
     textarea.className = "codemirror-textarea";
