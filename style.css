@@ -199,6 +199,9 @@ window {
   width: 250px;
   margin-bottom: 4px;
 }
+#overlay-login input[type="checkbox"] {
+  cursor: pointer;
+}
 #overlay-login label {
   cursor: pointer;
 }
