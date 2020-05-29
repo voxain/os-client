@@ -190,7 +190,8 @@ window {
   font-size: 48px;
   margin-bottom: 8px;
 }
-#overlay-login input {
+#overlay-login input[type="text"],
+#overlay-login input[type="password"] {
   border: 1px solid black;
   border-radius: 4px;
   padding: 5px;
