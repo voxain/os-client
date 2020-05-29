@@ -41,33 +41,7 @@ let ONLOAD = function () {
     let target = e.target;
   };
 
-  Object.keys(ProgramList)
-    .sort()
-    .forEach((prog) => {
-      prog = ProgramList[prog];
-      let progBox = document.createElement("div");
-      progBox.className = "taskbar-program";
-      progBox.setAttribute("noselect", "");
-      progBox.onclick = function () {
-        new Window(prog.defaultTitle, prog.name);
-        _("taskbar-menu").style.display = "none";
-      };
-
-      let progIcon = document.createElement("img");
-      progIcon.className = "taskbar-program-icon";
-      progIcon.src = prog.icon || "";
-      progIcon.alt = prog.name;
-      progIcon.setAttribute("noselect", "");
-      progBox.appendChild(progIcon);
-
-      let progTitle = document.createElement("div");
-      progTitle.className = "taskbar-program-title";
-      progTitle.innerHTML = prog.formattedName;
-      progBox.appendChild(progTitle);
-
-      _("taskbar-menu").appendChild(progBox);
-    });
-
+  SetPrograms();
   LoadWindows();
   setInterval(SaveWindows, 500);
 
