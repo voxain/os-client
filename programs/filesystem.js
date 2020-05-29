@@ -47,7 +47,7 @@ new Program(
           back.appendChild(icon);
 
           let data = document.createElement("span");
-          data.innerHTML = "..";
+          data.innerHTML = "←";
           back.appendChild(data);
 
           back.onclick = function () {
