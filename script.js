@@ -97,5 +97,3 @@ let ONLOAD = function () {
 };
 
 let ONLOADINT = setInterval(ONLOAD);
-if (window.location.href.endsWith("?nologin=true"))
-  _("overlay").style.display = "none";
