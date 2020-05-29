@@ -1,4 +1,4 @@
-let html = new Program(
+new Program(
   "html",
   (win) => {
     win.querySelector(".window-content").innerHTML = "Hello!";

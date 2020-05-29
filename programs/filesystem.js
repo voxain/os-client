@@ -1,4 +1,4 @@
-let filesystem = new Program(
+new Program(
   "filesystem",
   (win) => {
     let content = win.querySelector(".window-content");

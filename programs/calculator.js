@@ -1,4 +1,4 @@
-let calculator = new Program(
+new Program(
   "calculator",
   (win) => {
     let calcHTML = `
