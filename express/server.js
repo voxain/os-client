@@ -11,19 +11,9 @@ const axios = require("axios");
 const router = express.Router();
 app.use(bodyParser.json());
 
-router.post("/fetchFiles", (req, res) => {
+router.post("*", (req, res) => {
   axios
-    .post(APIURL + "fetchFiles", req.body)
-    .then((resp) => {
-      res.send(resp.data || {});
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-});
-router.post("/login", (req, res) => {
-  axios
-    .post(APIURL + "login", req.body)
+    .post(APIURL + req.originalUrl, req.body)
     .then((resp) => {
       res.send(resp.data || {});
     })
