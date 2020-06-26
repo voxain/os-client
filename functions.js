@@ -38,7 +38,10 @@ let MakeWindowsInteractive = function () {
         if (close.parentElement !== w.window) newWINDOWS.push(w);
       });
       WINDOWS = newWINDOWS;
-      close.parentElement.remove();
+      close.parentElement.className += "closewindow";
+      setTimeout(function () {
+        close.parentElement.remove();
+      }, 500);
     };
   });
 };

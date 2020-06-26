@@ -312,3 +312,22 @@ window {
 .context-menu-button:hover {
   background-color: #464646;
 }
+
+@-webkit-keyframes close_window {
+  100% {
+    -webkit-transform: scale(0.4);
+    opacity: 0;
+  }
+}
+@keyframes close_window {
+  100% {
+    -webkit-transform: scale(0.4);
+    opacity: 0;
+  }
+}
+.closewindow {
+  -webkit-animation: close_window 0.5s ease-in;
+  animation: close_window 0.5s ease-in;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
