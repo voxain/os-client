@@ -38,7 +38,8 @@ let MakeWindowsInteractive = function () {
         if (close.parentElement !== w.window) newWINDOWS.push(w);
       });
       WINDOWS = newWINDOWS;
-      close.parentElement.className += "closewindow";
+      close.parentElement.style.webkitAnimationPlayState = "running";
+      close.parentElement.style.animationPlayState = "running";
       setTimeout(function () {
         close.parentElement.remove();
       }, 500);

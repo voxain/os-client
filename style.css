@@ -109,6 +109,18 @@ body {
   font-family: "nevis Bold";
 }
 
+@-webkit-keyframes close_window {
+  100% {
+    -webkit-transform: scale(0.4);
+    opacity: 0;
+  }
+}
+@keyframes close_window {
+  100% {
+    -webkit-transform: scale(0.4);
+    opacity: 0;
+  }
+}
 window {
   display: block;
   box-shadow: 0px 0px 26px 5px rgba(0, 0, 0, 0.45);
@@ -117,6 +129,12 @@ window {
   height: 400px;
   border-radius: 0px 0px 4px 4px;
   position: absolute;
+  -webkit-animation: close_window 0.5s ease-in;
+  animation: close_window 0.5s ease-in;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  animation-play-state: paused;
+  -webkit-animation-play-state: paused;
 }
 .window-title {
   display: block;
@@ -311,23 +329,4 @@ window {
 }
 .context-menu-button:hover {
   background-color: #464646;
-}
-
-@-webkit-keyframes close_window {
-  100% {
-    -webkit-transform: scale(0.4);
-    opacity: 0;
-  }
-}
-@keyframes close_window {
-  100% {
-    -webkit-transform: scale(0.4);
-    opacity: 0;
-  }
-}
-.closewindow {
-  -webkit-animation: close_window 0.5s ease-in;
-  animation: close_window 0.5s ease-in;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
 }
