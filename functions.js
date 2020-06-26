@@ -42,7 +42,7 @@ let MakeWindowsInteractive = function () {
       close.parentElement.style.animationPlayState = "running";
       setTimeout(function () {
         close.parentElement.remove();
-      }, 500);
+      }, 200);
     };
   });
 };
