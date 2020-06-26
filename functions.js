@@ -20,18 +20,17 @@ let MakeWindowsInteractive = function () {
     minHeight: 50,
     minWidth: 100,
   });
-  document
-    .querySelectorAll(".window-title:not([noresize])")
-    .forEach((title) => {
-      title.ondblclick = function () {
-        $(title.parentElement).animate({
-          height: _("active-area").offsetHeight,
-          width: _("active-area").offsetWidth,
-          left: "0px",
-          top: "0px",
-        });
-      };
-    });
+  document.querySelectorAll("window:not([noresize])").forEach((win) => {
+    let title = win.querySelector(".window-title");
+    title.ondblclick = function () {
+      $(title.parentElement).animate({
+        height: _("active-area").offsetHeight,
+        width: _("active-area").offsetWidth,
+        left: "0px",
+        top: "0px",
+      });
+    };
+  });
   document.querySelectorAll(".window-close").forEach((close) => {
     close.onclick = function () {
       let newWINDOWS = [];
