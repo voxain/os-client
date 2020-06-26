@@ -67,7 +67,7 @@ CodeMirrorThemes.forEach((t) => {
   $("<link/>", {
     rel: "stylesheet",
     type: "text/css",
-    href: "/codemirror/themes/" + t + ".css",
+    href: "./codemirror/themes/" + t + ".css",
   }).appendTo("head");
 });
 let CodeMirrorModes = {
@@ -85,7 +85,7 @@ let CodeMirrorModes = {
 };
 requiredToLoad += Object.keys(CodeMirrorModes).length;
 Object.keys(CodeMirrorModes).forEach((t) => {
-  $.getScript("/codemirror/lang/" + t + ".js", function () {
+  $.getScript("./codemirror/lang/" + t + ".js", function () {
     loaded++;
   });
 });

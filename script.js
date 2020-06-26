@@ -3,13 +3,13 @@ let requiredToLoad = 3;
 let programsInstalled = ["html", "calculator", "filesystem", "codemirror"];
 requiredToLoad += programsInstalled.length;
 programsInstalled.forEach((p) => {
-  $.getScript("/programs/" + p + ".js", function () {
+  $.getScript("./programs/" + p + ".js", function () {
     loaded++;
   });
   $("<link/>", {
     rel: "stylesheet",
     type: "text/css",
-    href: "/programs/" + p + ".css",
+    href: "./programs/" + p + ".css",
   }).appendTo("head");
   console.log(`Loading ${p}...`);
 });
