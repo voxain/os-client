@@ -186,7 +186,7 @@ let Window = function (title, program, pass) {
   WINDOWS.push(this);
 };
 
-let Auth = {};
+window.Auth = {};
 
 let LoginErrors = {
   DIR_NOT_EXIST: "Invalid username.",

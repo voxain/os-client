@@ -32,6 +32,7 @@ _("overlay-login-username").select();
 
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
+  if (!Auth.token) return;
   clearInterval(ONLOADINT);
   let ver = "0.1.0";
   document.getElementsByTagName("title")[0].innerHTML = "PHLAME_OS v" + ver;
