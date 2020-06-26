@@ -20,6 +20,16 @@ let MakeWindowsInteractive = function () {
     minHeight: 50,
     minWidth: 100,
   });
+  document.querySelectorAll(".window-title").forEach((title) => {
+    title.ondblclick = function () {
+      $(title).animate({
+        height: _("active-area").offsetHeight,
+        width: _("active-area").offsetWidth,
+        left: "0px",
+        top: "0px",
+      });
+    };
+  });
   document.querySelectorAll(".window-close").forEach((close) => {
     close.onclick = function () {
       let newWINDOWS = [];
