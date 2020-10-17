@@ -1,7 +1,7 @@
 {
-  "name": "netlify-express",
+  "name": "leafletos",
   "version": "0.0.1",
-  "description": "Example of how to deploy a Express.js Netlify app.",
+  "description": "LeafletOS",
   "main": "functions/server.js",
   "scripts": {
     "build": "netlify-lambda build express",

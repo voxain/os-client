@@ -35,7 +35,7 @@ let ONLOAD = function () {
   if (!Auth.token) return;
   clearInterval(ONLOADINT);
   let ver = "0.1.0";
-  document.getElementsByTagName("title")[0].innerHTML = "PHLAME_OS v" + ver;
+  document.getElementsByTagName("title")[0].innerHTML = "LeafletOS v" + ver;
 
   document.onclick = function (e) {
     if (e.target.id !== "context-menu")
