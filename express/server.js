@@ -12,6 +12,7 @@ const router = express.Router();
 app.use(bodyParser.json());
 
 router.post("/fetchFiles", (req, res) => {
+  return res.send({}); //temp
   axios
     .post(APIURL + "fetchFiles", req.body)
     .then((resp) => {
@@ -22,6 +23,7 @@ router.post("/fetchFiles", (req, res) => {
     });
 });
 router.post("/login", (req, res) => {
+  return res.send({ error: "", token: "token" }); //temp
   axios
     .post(APIURL + "login", req.body)
     .then((resp) => {
