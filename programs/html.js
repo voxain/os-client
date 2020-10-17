@@ -1,7 +1,7 @@
 new Program(
   "html",
   (win) => {
-    win.querySelector(".window-content").innerHTML = "Hello!";
+    win.querySelector(".window-content").innerHTML = "No File Chosen";
   },
   {
     formattedName: "HTML Viewer",
