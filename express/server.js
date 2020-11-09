@@ -5,14 +5,13 @@ const serverless = require("serverless-http");
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const APIURL = "http://host.phlamedev.com:6077/";
+const APIURL = "https://phlameos-server.glitch.me/";
 const axios = require("axios");
 
 const router = express.Router();
 app.use(bodyParser.json());
 
 router.post("/fetchFiles", (req, res) => {
-  return res.send({}); //temp
   axios
     .post(APIURL + "fetchFiles", req.body)
     .then((resp) => {
@@ -23,7 +22,6 @@ router.post("/fetchFiles", (req, res) => {
     });
 });
 router.post("/login", (req, res) => {
-  return res.send({ error: "", token: "token" }); //temp
   axios
     .post(APIURL + "login", req.body)
     .then((resp) => {
