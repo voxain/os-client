@@ -125,12 +125,16 @@ let LoadWindows = function () {
 
       let windowStore = JSON.parse(syscfg) || [];
       windowStore.forEach((w) => {
-        let win = new Window(w.title, w.program);
-        win.window.style.top = w.top;
-        win.window.style.left = w.left;
-        win.window.style.height = w.height;
-        win.window.style.width = w.width;
-        if (w.zIndex) win.window.style["z-index"] = w.zIndex;
+        let waitInterval = setInterval(function () {
+          if (!ProgramList[w.program]) return;
+          clearInterval(waitInterval);
+          let win = new Window(w.title, w.program);
+          win.window.style.top = w.top;
+          win.window.style.left = w.left;
+          win.window.style.height = w.height;
+          win.window.style.width = w.width;
+          if (w.zIndex) win.window.style["z-index"] = w.zIndex;
+        }, 500);
       });
     }
   );
