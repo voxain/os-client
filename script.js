@@ -101,7 +101,7 @@ let requiredToLoad = 3; // set initial load requirement
 
 let programsInstalled = [
   // set initial programs installed
-  "html",
+  "popup",
   "calculator",
   "filesystem",
   "codemirror",
