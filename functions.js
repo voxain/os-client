@@ -344,7 +344,7 @@ let Window = function (title, program, pass) {
   taskbarIcon.setAttribute("for-window", this.id);
   let taskbarIconImage = document.createElement("img");
   taskbarIconImage.className = "taskbar-item-image";
-  taskbarIconImage.src = this.program.icon;
+  taskbarIconImage.src = this.program.icon || "";
   taskbarIcon.appendChild(taskbarIconImage);
   taskbarIcon.onclick = function () {
     winMinimize.click();
