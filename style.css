@@ -3,19 +3,19 @@
   font-family: "nevis Bold";
   font-style: normal;
   font-weight: normal;
-  src: url("https://cdn.glitch.com/fda6f707-e98d-43dc-bf2a-b42cb1acc2c3%2Fnevis.woff?v=1574552202182");
+  src: url("./font/Nevis.ttf");
 }
 @font-face {
   font-family: "Franxurter";
   font-style: normal;
   font-weight: normal;
-  src: url("https://cdn.glitch.com/ceb62fde-aeb5-4d44-b3e4-8009c59c5e0c%2FFranxurterTotallyMedium-gxwjp.ttf?v=1577942532042");
+  src: url("./font/Franxurter.ttf");
 }
 @font-face {
   font-family: "DejaVu Sans Mono";
   font-style: normal;
   font-weight: normal;
-  src: url("https://cdn.glitch.com/ceb62fde-aeb5-4d44-b3e4-8009c59c5e0c%2FDejaVuSansMono.ttf?v=1578118115744");
+  src: url("./font/Pacifico.ttf");
 }
 
 body {
