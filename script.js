@@ -6,7 +6,7 @@ const meowos = {
   error: false, // probably will fix this later, idk its 1 am in the morning, help
   system: {
     loggingcolors: {
-      Reset: "\x1b[37m", // \x1b[0m doesn't work for some reason; It's a nodejs thing
+      Reset: "\x1b[37m",
 
       FgBlack: "\x1b[30m",
       FgRed: "\x1b[31m",
@@ -54,7 +54,7 @@ meowos.ErrorHandler = function (
     "<span>A fatal error has occurred and MeowOS has stopped execution.</span>" +
     "<p><span id='stop'>STOP Code: </span><span>" +
     errorData.split("\n")[0] +
-    "</span><br><br>In order to continue MeowOS, you will need to reload MeowOS. Any progress on or within programs may have been lost.</p>" +
+    '</span><br><br>In order to continue using MeowOS, you will need to <a href="javascript:window.location.reload()">reload the page</a>. Any progress on or within programs may have been lost.</p>' +
     "<br><p id='reported'>This incident has been reported to the MeowOS Developers.</p>" +
     "</div>";
   meowos.log("X", location, errorData);
