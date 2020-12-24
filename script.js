@@ -31,13 +31,14 @@ let getStatus = function () {
   });
 };
 getStatus();
-setInterval(getStatus, 4000);
+let getStatusInt = setInterval(getStatus, 4000);
 
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   if (!Auth.token) return;
 
   clearInterval(ONLOADINT);
+  clearInterval(getStatusInt);
 
   if (MeowOS.error) return;
 
