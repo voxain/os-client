@@ -140,6 +140,57 @@ let ProgramList = {};
 let GetProgram = function (program) {
   return ProgramList[(program || "").toLowerCase()] || {};
 };
+let InstallProgram = function (p) {
+  if (meowos.error) return;
+  meowos.log("i", "PROGRAM LOADER", `Loading '${p}'...`);
+
+  $.ajax({
+    type: "get",
+    url: `${APIURL}programs/${p}`,
+    success: function (program, text) {
+      if (meowos.error) return;
+
+      let css = program.style || "";
+      if (css) {
+        // set CSS for each program in the head tag
+        let style = document.createElement("style");
+        style.innerHTML = css;
+        style.setAttribute("os-for-program", p);
+        document.head.appendChild(style);
+      }
+
+      let html = program.html || "";
+      window[`program-html-${p}`] = html; // temporary until a better solution is found (possibly adding into the script)
+
+      let js = program.script;
+      eval(js);
+
+      meowos.log("S", "PROGRAM LOADER", `Loaded '${p}'`);
+    },
+    error: function (request, status, error) {
+      if (meowos.error) return;
+
+      var message = "NO_ERROR";
+      if (request.status === 0 && !window.navigator.onLine) {
+        message = "INTERNET_DISCONNECTED";
+      } else if (request.status == 404) {
+        message = "RESOURCE_NOT_FOUND"; // Hopefully to never see this
+      } else if (request.status == 500) {
+        message = "INTERNAL_API_ERROR";
+      } else if (status == "timeout") {
+        message = `TIMEOUT_REACHED_LOADING_${p.toUpperCase()}`;
+      } else if (status == "error") {
+        message = "CONNECTION_TO_API_FAILED";
+      }
+
+      meowos.ErrorHandler(
+        "PROGRAM LOADER",
+        `Failed to load '${p}' due to: ${message}`,
+        true
+      );
+    },
+  });
+};
 /**
  * Initializes ("installs") a program
  * @constructor
@@ -166,6 +217,7 @@ let Program = function (name, func) {
       fullOptions: options,
     };
     ProgramList[name.toLowerCase()] = this.program;
+    SetPrograms();
   });
 };
 let SetPrograms = function () {
