@@ -2,9 +2,9 @@
  * functions.js
  * Author: Meow Developers
  * Copyright Meow Developers
-*/
+ */
 
-const meowos = {
+const MeowOS = {
   error: false, // probably will fix this later, idk its 1 am in the morning, help
   system: {
     loggingcolors: {
@@ -37,7 +37,7 @@ function AjaxErrorMsg(request, status, error) {
   if (request.status === 0 && !window.navigator.onLine) {
     message = "INTERNET_DISCONNECTED";
   } else if (request.status == 404) {
-    message = "RESOURCE_NOT_FOUND"; // Hopefully to never see this
+    message = "RESOURCE_NOT_FOUND";
   } else if (request.status == 500) {
     message = "INTERNAL_API_ERROR";
   } else if (status == "timeout") {
@@ -46,9 +46,9 @@ function AjaxErrorMsg(request, status, error) {
     message = "CONNECTION_TO_API_FAILED";
   } else {
     message = status || response.status;
-  };
+  }
   return message;
-};
+}
 
 loaded++;
 var _ = function (id) {
@@ -61,7 +61,7 @@ window.WINDOWS = [];
 window.APIURL = "https://service-2308.something.gg/"; // set API URL, will need to be changed when official release is out
 
 let MakeWindowsInteractive = function () {
-  if (meowos.error) return;
+  if (MeowOS.error) return;
   $("window").draggable({
     handle: ".window-title",
     containment: "document",
@@ -77,7 +77,7 @@ let MakeWindowsInteractive = function () {
   document.querySelectorAll("window:not([noresize])").forEach((win) => {
     let title = win.querySelector(".window-title");
     title.ondblclick = function () {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
       // fullscreen on double-click of title bar
       //TODO: make window return to previous size if double-clicked again
       $(title.parentElement).animate({
@@ -91,7 +91,7 @@ let MakeWindowsInteractive = function () {
   // Init minimize buttons.
   document.querySelectorAll(".window-minimize").forEach((minimize) => {
     minimize.onclick = function () {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
       $(minimize.parentElement).fadeOut({
         start: function () {
           $(this).css("transform", "scale(0.3)");
@@ -139,7 +139,7 @@ let MakeWindowsInteractive = function () {
 };
 
 let SaveWindows = function () {
-  if (meowos.error) return;
+  if (MeowOS.error) return;
 
   let windows = [];
   WINDOWS.forEach((w) => {
@@ -168,21 +168,29 @@ let SaveWindows = function () {
       content: formattedWindowContent,
     },
     error: function (request, status, error) {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
 
-      meowos.ErrorHandler("SYSTEM", `Failed to save window data due to: ${AjaxErrorMsg(request, status, error)}`, true);
-    }
+      MeowOS.ErrorHandler(
+        "SYSTEM",
+        `Failed to save window data due to: ${AjaxErrorMsg(
+          request,
+          status,
+          error
+        )}`,
+        true
+      );
+    },
   });
 };
 let LoadWindows = function () {
-  if (meowos.error) return;
+  if (MeowOS.error) return;
 
   $.ajax({
     type: "POST",
     url: `${APIURL}fs/fetchFiles`,
     data: {
       token: Auth.token,
-      path: "/system"
+      path: "/system",
     },
     success: function (f, text) {
       let syscfg = f.files.filter(
@@ -204,30 +212,36 @@ let LoadWindows = function () {
       });
     },
     error: function (request, status, error) {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
 
-      meowos.ErrorHandler("SYSTEM", `Failed to load window data due to: ${AjaxErrorMsg(request, status, error)}`, true);
-
-    }
+      MeowOS.ErrorHandler(
+        "SYSTEM",
+        `Failed to load window data due to: ${AjaxErrorMsg(
+          request,
+          status,
+          error
+        )}`,
+        true
+      );
+    },
   });
-
 };
 
 let ProgramList = {};
 let GetProgram = function (program) {
-  if (meowos.error) return;
+  if (MeowOS.error) return;
   return ProgramList[(program || "").toLowerCase()] || {};
 };
 let InstallProgram = function (p) {
-  if (meowos.error) return;
+  if (MeowOS.error) return;
 
-  meowos.log("i", "PROGRAM LOADER", `Loading '${p}'...`);
+  MeowOS.log("i", "PROGRAM LOADER", `Loading '${p}'...`);
 
   $.ajax({
     type: "GET",
     url: `${APIURL}programs/${p}`,
     success: function (program, text) {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
 
       let css = program.style || "";
       if (css) {
@@ -244,12 +258,16 @@ let InstallProgram = function (p) {
       let js = program.script;
       eval(js);
 
-      meowos.log("S", "PROGRAM LOADER", `Loaded '${p}'`);
+      MeowOS.log("S", "PROGRAM LOADER", `Loaded '${p}'`);
     },
     error: function (request, status, error) {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
 
-      meowos.ErrorHandler("PROGRAM LOADER", `Failed to load ${p} due to: ${AjaxErrorMsg(request, status, error)}`, true);
+      MeowOS.ErrorHandler(
+        "PROGRAM LOADER",
+        `Failed to load ${p} due to: ${AjaxErrorMsg(request, status, error)}`,
+        true
+      );
     },
   });
 };
@@ -271,10 +289,18 @@ let UninstallProgram = function (prog) {
       window.location.reload();
     },
     error: function (request, status, error) {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
 
-      meowos.ErrorHandler("SYSTEM", `Failed to uninstall ${prog} due to: ${AjaxErrorMsg(request, status, error)}`, true);
-    }
+      MeowOS.ErrorHandler(
+        "SYSTEM",
+        `Failed to uninstall ${prog} due to: ${AjaxErrorMsg(
+          request,
+          status,
+          error
+        )}`,
+        true
+      );
+    },
   });
 };
 
@@ -344,20 +370,28 @@ let SetPrograms = function () {
       _("taskbar-menu").appendChild(progBox);
     });
 
-    $.ajax({
-      type: "POST",
-      url: `${APIURL}fs/writeFile`,
-      data: {
-        path: "/system/installed.syscfg",
-        token: Auth.token,
-        content: JSON.stringify(Object.keys(ProgramList)),
-      },
-      error: function (request, status, error) {
-        if (meowos.error) return;
-  
-        meowos.ErrorHandler("PROGRAM LOADER", `Failed to load ${prog} due to: ${AjaxErrorMsg(request, status, error)}`, true);
-      }
-    });
+  $.ajax({
+    type: "POST",
+    url: `${APIURL}fs/writeFile`,
+    data: {
+      path: "/system/installed.syscfg",
+      token: Auth.token,
+      content: JSON.stringify(Object.keys(ProgramList)),
+    },
+    error: function (request, status, error) {
+      if (MeowOS.error) return;
+
+      MeowOS.ErrorHandler(
+        "PROGRAM LOADER",
+        `Failed to load ${prog} due to: ${AjaxErrorMsg(
+          request,
+          status,
+          error
+        )}`,
+        true
+      );
+    },
+  });
 };
 
 /**
@@ -481,7 +515,7 @@ let OnLogin = function () {
     url: `${APIURL}fs/fetchFiles`,
     data: {
       token: Auth.token,
-      path: "/system"
+      path: "/system",
     },
     success: function (f, text) {
       let syscfg = f.files.filter(
@@ -494,10 +528,14 @@ let OnLogin = function () {
       });
     },
     error: function (request, status, error) {
-      if (meowos.error) return;
-  
-      meowos.ErrorHandler("SYSTEM", `Failed to load data due to: ${AjaxErrorMsg(request, status, error)}`, true);
-      }
+      if (MeowOS.error) return;
+
+      MeowOS.ErrorHandler(
+        "SYSTEM",
+        `Failed to load data due to: ${AjaxErrorMsg(request, status, error)}`,
+        true
+      );
+    },
   });
 };
 
@@ -523,14 +561,15 @@ let Login = function () {
     return (_("overlay-login-error").innerHTML = "Please enter a password.");
 
   let oldHTML = _("overlay-login-enter").innerHTML;
-  _("overlay-login-enter").innerHTML = '<p class="loading-dots"><span>.</span><span>.</span><span>.</span></p>';
+  _("overlay-login-enter").innerHTML =
+    '<p class="loading-dots"><span>.</span><span>.</span><span>.</span></p>';
 
   $.ajax({
     type: "POST",
     url: `${APIURL}account/login`,
     data: {
       username: username,
-      password: password
+      password: password,
     },
     success: function (data, text) {
       _("overlay-login-enter").innerHTML = oldHTML;
@@ -556,10 +595,18 @@ let Login = function () {
       OnLogin();
     },
     error: function (request, status, error) {
-      if (meowos.error) return;
+      if (MeowOS.error) return;
 
-      meowos.ErrorHandler("SYSTEM", `Failed to login to MeowOS due to: ${AjaxErrorMsg(request, status, error)}`, true);
-    }
+      MeowOS.ErrorHandler(
+        "SYSTEM",
+        `Failed to login to MeowOS due to: ${AjaxErrorMsg(
+          request,
+          status,
+          error
+        )}`,
+        true
+      );
+    },
   });
 };
 
@@ -580,19 +627,21 @@ _("overlay-create-login").onclick = function () {
   $("#overlay-login").fadeIn(400);
 };
 
-
 // Cool Error Handler Script
 // Provided by Yours Truly, TCG
 // Version 1.0.0.0
 // Modified 12/24/2020
 
-meowos.ErrorHandler = function (
+MeowOS.ErrorHandler = function (
   location = "SYSTEM",
   error,
   reportToDevs = false
 ) {
   var errorData = error.message ? error.message : error;
-  if (error.stack || error.stacktrace) errorData += `\nStacktrace: ${((error.stack) ? error.stack : error.stacktrace)}`;
+  if (error.stack || error.stacktrace)
+    errorData += `\nStacktrace: ${
+      error.stack ? error.stack : error.stacktrace
+    }`;
   document.body.innerHTML = `
     <style>
       html, body { width: 100%; height: 100%; }
@@ -613,7 +662,7 @@ meowos.ErrorHandler = function (
       <p id="reported">This incident has been reported to the MeowOS Developers.</p>
     </div>
   `;
-  meowos.log("X", location, errorData);
+  MeowOS.log("X", location, errorData);
 
   if (reportToDevs) {
     // TODO: Report to the damn developers or something...
@@ -621,7 +670,7 @@ meowos.ErrorHandler = function (
 
     document.getElementById("reported").style.display = "show";
   }
-  meowos.error = true;
+  MeowOS.error = true;
 };
 
 // Cool Logging Script
@@ -629,9 +678,9 @@ meowos.ErrorHandler = function (
 // Version 1.0.0.0
 // Modified 12/23/2020
 
-meowos.log = function (type, location, message) {
+MeowOS.log = function (type, location, message) {
   // This is crappy code
-  var loggingcolors = meowos.system.loggingcolors,
+  var loggingcolors = MeowOS.system.loggingcolors,
     typecolor = loggingcolors.FgWhite;
 
   if (type == "X") typecolor = loggingcolors.FgRed;

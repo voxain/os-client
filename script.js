@@ -2,15 +2,15 @@
  * script.js
  * Author: Meow Developers
  * Copyright Meow Developers
-*/
+ */
 
 let requiredToLoad = 3; // set initial load requirement
 
 window.onload = function () {
-  meowos.log(
+  MeowOS.log(
     "i",
     "SYSTEM",
-    `MeowOS v${meowos.system.version} is now loading...`
+    `MeowOS v${MeowOS.system.version} is now loading...`
   );
   loaded++;
 };
@@ -33,21 +33,21 @@ let ONLOAD = function () {
 
   clearInterval(ONLOADINT);
 
-  if (meowos.error) return;
+  if (MeowOS.error) return;
 
-  meowos.log("S", "SYSTEM", `MeowOS v${meowos.system.version} has loaded!`);
+  MeowOS.log("S", "SYSTEM", `MeowOS v${MeowOS.system.version} has loaded!`);
 
   document.getElementsByTagName("title")[0].innerHTML =
-    "MeowOS | v" + meowos.system.version;
+    "MeowOS | v" + MeowOS.system.version;
 
   document.onclick = function (e) {
-    if (meowos.error) return;
+    if (MeowOS.error) return;
 
     if (e.target.id !== "context-menu")
       _("context-menu").style.display = "none";
   };
   document.oncontextmenu = function (e) {
-    if (meowos.error) return;
+    if (MeowOS.error) return;
 
     if (e.target.tagName == "INPUT" || e.target.tagName == "TEXTAREA") return;
     e.preventDefault();
@@ -61,7 +61,7 @@ let ONLOAD = function () {
   setInterval(SaveWindows, 3000); //TODO: make this save when windows are moved (prevents API spam)
 
   _("taskbar-button").onclick = function () {
-    if (meowos.error) return;
+    if (MeowOS.error) return;
 
     if (_("taskbar-menu").style.display == "block") {
       _("taskbar-menu").style.display = "none";
@@ -71,7 +71,7 @@ let ONLOAD = function () {
   }; //TODO: hide menu when clicked outside of it
 
   setInterval(function () {
-    if (meowos.error) return;
+    if (MeowOS.error) return;
 
     let date = new Date();
     let clockTime =
@@ -81,7 +81,7 @@ let ONLOAD = function () {
 
   // Detect if windows are off-screen and move them into the screen.
   setInterval(function () {
-    if (meowos.error) return;
+    if (MeowOS.error) return;
 
     WINDOWS.forEach((W) => {
       if (W.offscreen()) {
