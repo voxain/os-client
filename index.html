@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- Include selfhosted libraries. -->
     <script src="./self/codemirror/codemirror.js" defer></script>
     <link rel="stylesheet" href="./self/codemirror/codemirror.css" />
     <script src="./self/codemirror/init.js" defer></script>
-
     <script src="./self/formatter/beautify.js.js"></script>
     <script src="./self/formatter/beautify.html.js"></script>
     <script src="./self/formatter/beautify.css.js"></script>
@@ -20,12 +20,14 @@
     <script>
       window.loaded = 0;
     </script>
+    <!-- Include jQuery. -->
     <script src="./self/jquery/jquery-3.5.1.js"></script>
     <script src="./self/jquery/jquery.ui-1.12.1.js"></script>
     <link rel="stylesheet" href="./self/jquery/jquery.ui-3.5.1.css" />
     <script src="./self/jquery/jquery.touchpunch-0.2.3.js"></script>
   </head>
   <body>
+    <!-- Login/Create Overlay -->
     <div id="overlay">
       <div id="overlay-login" noselect>
         <img noselect src="./logo.png" alt="" />
@@ -81,7 +83,9 @@
         <button id="overlay-create-login">Login</button>
       </div>
     </div>
+    <!-- The area for the windows. -->
     <div id="active-area"></div>
+    <!-- Taskbar - For programs/start menu/clock. -->
     <div id="taskbar">
       <div id="taskbar-button">
         <img noselect src="./logo.png" alt="" />

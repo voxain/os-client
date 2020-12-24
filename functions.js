@@ -1,12 +1,12 @@
 loaded++;
 var _ = function (id) {
   return document.getElementById(id);
-};
+}; // "Mini jQuery" function for IDs.
 var rand = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 window.WINDOWS = [];
-window.APIURL = "http://localhost:6969/";
+window.APIURL = "http://localhost:6969/"; // set API URL, will need to be changed when official release is out
 
 let MakeWindowsInteractive = function () {
   $("window").draggable({
@@ -15,6 +15,7 @@ let MakeWindowsInteractive = function () {
     stack: "window",
   });
   $("window:not([noresize])").resizable({
+    // Makes the proper windows resizeable.
     containment: "document",
     handles: "all",
     minHeight: 50,
@@ -23,6 +24,8 @@ let MakeWindowsInteractive = function () {
   document.querySelectorAll("window:not([noresize])").forEach((win) => {
     let title = win.querySelector(".window-title");
     title.ondblclick = function () {
+      // fullscreen on double-click of title bar
+      //TODO: make window return to previous size if double-clicked again
       $(title.parentElement).animate({
         height: _("active-area").offsetHeight,
         width: _("active-area").offsetWidth,
@@ -31,6 +34,7 @@ let MakeWindowsInteractive = function () {
       });
     };
   });
+  // Init minimize buttons.
   document.querySelectorAll(".window-minimize").forEach((minimize) => {
     minimize.onclick = function () {
       $(minimize.parentElement).fadeOut({
@@ -54,6 +58,7 @@ let MakeWindowsInteractive = function () {
       };
     };
   });
+  // Init close buttons.
   document.querySelectorAll(".window-close").forEach((close) => {
     close.onclick = function () {
       let newWINDOWS = [];
@@ -93,6 +98,7 @@ let SaveWindows = function () {
     });
   });
 
+  // Formats the window JSON. (for easier reading/editing)
   let formattedWindowContent =
     js_beautify(JSON.stringify(windows)) || JSON.stringify(windows);
   $.post(
@@ -134,7 +140,14 @@ let ProgramList = {};
 let GetProgram = function (program) {
   return ProgramList[(program || "").toLowerCase()] || {};
 };
+/**
+ * Initializes ("installs") a program
+ * @constructor
+ * @param {String} name - The UNIQUE name of the program.
+ * @param {Function} func - The function to evaluate when the program is run.
+ */
 let Program = function (name, func) {
+  // Currently only "official" programs are supported.
   $.get(`${APIURL}programs/${name}`, function (program) {
     let options = program.meta;
 
@@ -157,11 +170,13 @@ let SetPrograms = function () {
   _("taskbar-menu").innerHTML = "";
   Object.keys(ProgramList)
     .sort((a, b) => {
+      // Sorts programs by formattedName in programs list.
       a = ProgramList[a].formattedName;
       b = ProgramList[b].formattedName;
       return a > b ? 1 : -1;
     })
     .forEach((prog) => {
+      // Creates program in start menu.
       prog = ProgramList[prog];
       let progBox = document.createElement("div");
       progBox.className = "taskbar-program";
@@ -187,16 +202,23 @@ let SetPrograms = function () {
     });
 };
 
+/**
+ * Creates a new window.
+ * @constructor
+ * @param {String} title - The title to initialize the window with.
+ * @param {String} program - The name of the program to run with the window.
+ * @param {any} pass - Data to pass to the program when run.
+ */
 let Window = function (title, program, pass) {
   this.title = title;
   this.program = GetProgram(program);
   this.passedData = pass;
-  this.id = Date.now();
+  this.id = Date.now(); //TODO: add actual IDs
 
   let win = document.createElement("window");
   win.style.position = "absolute";
   win.style.display = "none";
-  win.style["z-index"] = 1000;
+  win.style["z-index"] = 1000; //TODO: find out a better way to do this
   if (this.program.defaultWidth) win.style.width = this.program.defaultWidth;
   if (this.program.defaultHeight) win.style.height = this.program.defaultHeight;
   if (this.program.minWidth) win.style["min-width"] = this.program.minWidth;
@@ -235,6 +257,7 @@ let Window = function (title, program, pass) {
   _("taskbar-items").appendChild(taskbarIcon);
 
   _("active-area").appendChild(win);
+  // kind of hacky, but it works
   win.style.transform = "scale(0.7)";
   $(win).fadeIn({
     start: function () {
@@ -253,12 +276,14 @@ let Window = function (title, program, pass) {
   this.minimizeButton = winMinimize;
   this.closeButton = winClose;
 
+  // Puts the new window in the middle of the screen.
   win.style.top =
     _("active-area").offsetHeight / 2 - win.offsetHeight / 2 + "px";
   win.style.left =
     _("active-area").offsetWidth / 2 - win.offsetWidth / 2 + "px";
 
   this.offscreen = function () {
+    //TODO: find better way of doing this (detect when any part of the window is offscreen)
     var rect = this.window.getBoundingClientRect();
     return (
       rect.x + rect.width < 0 ||
@@ -270,13 +295,14 @@ let Window = function (title, program, pass) {
 
   let _this = this;
   this.sizeInterval = setInterval(function () {
+    // Sets the height of the window content to the size of the window (minus title bar)
     _this.content.style.height = _this.window.offsetHeight - 20 + "px";
   });
 
   try {
     this.program.eval(this.window, pass);
   } catch (e) {
-    this.content.innerHTML = "Error.";
+    this.content.innerHTML = "Error."; //TODO: pass actual error, and maybe more info
   }
 
   WINDOWS.push(this);
@@ -326,6 +352,7 @@ let Login = function () {
       });
       if (rememberUsername) localStorage.setItem("usernameStore", username);
       else localStorage.removeItem("usernameStore");
+
       if (rememberPassword) localStorage.setItem("passwordStore", password);
       else localStorage.removeItem("passwordStore");
     }

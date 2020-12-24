@@ -1,17 +1,19 @@
-let requiredToLoad = 3;
+let requiredToLoad = 3; // set initial load requirement
 
 let programsInstalled = [
+  // set initial programs installed
   "html",
   "calculator",
   "filesystem",
   "codemirror",
   "test",
-];
+]; //TODO: make this dynamic based on installed.syscfg
 requiredToLoad += programsInstalled.length;
 programsInstalled.forEach((p) => {
   $.get(`${APIURL}programs/${p}`, function (program) {
     let css = program.style || "";
     if (css) {
+      // set CSS for each program in the head tag
       let style = document.createElement("style");
       style.innerHTML = css;
       style.setAttribute("os-for-program", p);
@@ -19,7 +21,7 @@ programsInstalled.forEach((p) => {
     }
 
     let html = program.html || "";
-    window[`program-html-${p}`] = html;
+    window[`program-html-${p}`] = html; // temporary until a better solution is found (possibly adding into the script)
 
     let js = program.script;
     eval(js);
@@ -34,7 +36,7 @@ window.onload = function () {
 };
 setTimeout(function () {
   loaded++;
-}, 3000);
+}, 3000); //TODO: remove this + decrement requiredToLoad
 
 let storedUsername = localStorage.getItem("usernameStore");
 if (storedUsername) _("overlay-login-username").value = storedUsername;
@@ -49,7 +51,7 @@ let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   if (!Auth.token) return;
   clearInterval(ONLOADINT);
-  let ver = "0.1.0";
+  let ver = "0.1.0"; //TODO: include proper versioning
   document.getElementsByTagName("title")[0].innerHTML = "LeafletOS v" + ver;
 
   document.onclick = function (e) {
@@ -62,11 +64,11 @@ let ONLOAD = function () {
     let menu = _("context-menu");
     menu.style.top = e.clientY + "px";
     menu.style.left = e.clientX + "px";
-  };
+  }; //TODO: API for this
 
   SetPrograms();
   LoadWindows();
-  setInterval(SaveWindows, 5000);
+  setInterval(SaveWindows, 3000); //TODO: make this save when windows are moved (prevents API spam)
 
   _("taskbar-button").onclick = function () {
     if (_("taskbar-menu").style.display == "block") {
@@ -74,7 +76,7 @@ let ONLOAD = function () {
     } else {
       _("taskbar-menu").style.display = "block";
     }
-  };
+  }; //TODO: hide menu when clicked outside of it
 
   setInterval(function () {
     let date = new Date();
@@ -83,6 +85,7 @@ let ONLOAD = function () {
     _("taskbar-clock").innerHTML = clockTime;
   }, 500);
 
+  // Detect if windows are off-screen and move them into the screen.
   setInterval(function () {
     WINDOWS.forEach((W) => {
       if (W.offscreen()) {

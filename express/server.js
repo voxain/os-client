@@ -37,3 +37,5 @@ app.use("/.netlify/functions/server", router); // path must route to lambda
 
 module.exports = app;
 module.exports.handler = serverless(app);
+
+/* This is part of the netlify functions template. (modified to be a "proxy") */
