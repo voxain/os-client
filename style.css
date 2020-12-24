@@ -1,6 +1,6 @@
 /* Import Fonts */
 @font-face {
-  font-family: "nevis Bold";
+  font-family: "Nevis";
   font-style: normal;
   font-weight: normal;
   src: url("./font/Nevis.ttf");
@@ -89,7 +89,7 @@ body {
   box-sizing: border-box;
   vertical-align: middle;
   font-size: 26px;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
   margin-left: 4px;
 }
 #taskbar-menu .taskbar-program:hover {
@@ -129,7 +129,7 @@ body {
   text-align: center;
   padding-top: 1.5vh;
   color: white;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
 }
 
 window {
@@ -150,7 +150,7 @@ window {
   color: black;
   border-radius: 4px 4px 0px 0px;
   text-align: center;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
   cursor: move;
 }
 .window-content {
@@ -220,7 +220,7 @@ window {
   display: block;
   position: absolute;
   top: 20%;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
   color: white;
   text-align: center;
   width: 100%;
@@ -260,7 +260,7 @@ window {
   background-color: #1976d2;
   border-radius: 6px;
   cursor: pointer;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
 }
 #overlay-login-enter:hover {
   background-color: #1361af;
@@ -272,7 +272,7 @@ window {
   background-color: #e91e63;
   border-radius: 6px;
   cursor: pointer;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
 }
 #overlay-login-create:hover {
   background-color: #c2185b;
@@ -282,7 +282,7 @@ window {
   display: none;
   position: absolute;
   top: 20%;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
   color: white;
   text-align: center;
   width: 100%;
@@ -316,7 +316,7 @@ window {
   background-color: #e91e63;
   border-radius: 6px;
   cursor: pointer;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
 }
 #overlay-create-enter:hover {
   background-color: #c2185b;
@@ -328,7 +328,7 @@ window {
   background-color: #1976d2;
   border-radius: 6px;
   cursor: pointer;
-  font-family: "nevis Bold";
+  font-family: "Nevis";
 }
 #overlay-create-login:hover {
   background-color: #1361af;
