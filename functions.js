@@ -109,7 +109,7 @@ let SaveWindows = function () {
       content: formattedWindowContent,
     },
     (err) => {
-      if (err.error) console.error(err);
+      if (err.error) console.error(err); //TODO: add orangescreen
     }
   );
 };
@@ -256,6 +256,18 @@ let SetPrograms = function () {
 
       _("taskbar-menu").appendChild(progBox);
     });
+
+  $.post(
+    APIURL + "fs/writeFile",
+    {
+      path: "/system/installed.syscfg",
+      token: Auth.token,
+      content: JSON.stringify(Object.keys(ProgramList)),
+    },
+    (err) => {
+      if (err.error) console.error(err); //TODO: add orangescreen
+    }
+  );
 };
 
 /**
@@ -364,6 +376,24 @@ let Window = function (title, program, pass) {
   WINDOWS.push(this);
 };
 
+let OnLogin = function () {
+  $.post(
+    `${APIURL}fs/fetchFiles`,
+    { token: Auth.token, path: "/system" },
+    (f) => {
+      if (f.error) return; //TODO: add orangescreen here
+      let syscfg = f.files.filter(
+        (p) => p.path == "/system/installed.syscfg"
+      )[0].content; //TODO: add orangescreen if no file
+      if (!syscfg) return;
+
+      (JSON.parse(syscfg) || []).forEach((p) => {
+        InstallProgram(p);
+      });
+    }
+  );
+};
+
 window.Auth = {};
 
 let LoginErrors = {
@@ -411,6 +441,8 @@ let Login = function () {
 
       if (rememberPassword) localStorage.setItem("passwordStore", password);
       else localStorage.removeItem("passwordStore");
+
+      OnLogin();
     }
   );
 };

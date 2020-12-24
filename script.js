@@ -99,20 +99,6 @@ meowos.log = function (type, location, message) {
 
 let requiredToLoad = 3; // set initial load requirement
 
-let programsInstalled = [
-  // set initial programs installed
-  "popup",
-  "calculator",
-  "filesystem",
-  "codemirror",
-  "store",
-]; //TODO: make this dynamic based on installed.syscfg
-requiredToLoad += programsInstalled.length;
-programsInstalled.forEach((p) => {
-  InstallProgram(p);
-  loaded++;
-});
-
 window.onload = function () {
   meowos.log(
     "i",
