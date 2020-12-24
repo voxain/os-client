@@ -156,8 +156,7 @@ let SaveWindows = function () {
   });
 
   // Formats the window JSON. (for easier reading/editing)
-  let formattedWindowContent =
-    js_beautify(JSON.stringify(windows)) || JSON.stringify(windows);
+  let formattedWindowContent = js_beautify(JSON.stringify(windows)) || JSON.stringify(windows);
 
   $.ajax({
     type: "POST",
@@ -172,11 +171,7 @@ let SaveWindows = function () {
 
       MeowOS.ErrorHandler(
         "SYSTEM",
-        `Failed to save window data due to: ${AjaxErrorMsg(
-          request,
-          status,
-          error
-        )}`,
+        `Failed to save window data due to: ${AjaxErrorMsg(request, status, error)}`,
         true
       );
     },
@@ -193,9 +188,7 @@ let LoadWindows = function () {
       path: "/system",
     },
     success: function (f, text) {
-      let syscfg = f.files.filter(
-        (p) => p.path == "/system/windowStore.syscfg"
-      )[0].content;
+      let syscfg = f.files.filter((p) => p.path == "/system/windowStore.syscfg")[0].content;
 
       let windowStore = JSON.parse(syscfg) || [];
       windowStore.forEach((w) => {
@@ -216,11 +209,7 @@ let LoadWindows = function () {
 
       MeowOS.ErrorHandler(
         "SYSTEM",
-        `Failed to load window data due to: ${AjaxErrorMsg(
-          request,
-          status,
-          error
-        )}`,
+        `Failed to load window data due to: ${AjaxErrorMsg(request, status, error)}`,
         true
       );
     },
@@ -293,11 +282,7 @@ let UninstallProgram = function (prog) {
 
       MeowOS.ErrorHandler(
         "SYSTEM",
-        `Failed to uninstall ${prog} due to: ${AjaxErrorMsg(
-          request,
-          status,
-          error
-        )}`,
+        `Failed to uninstall ${prog} due to: ${AjaxErrorMsg(request, status, error)}`,
         true
       );
     },
@@ -383,11 +368,7 @@ let SetPrograms = function () {
 
       MeowOS.ErrorHandler(
         "PROGRAM LOADER",
-        `Failed to load ${prog} due to: ${AjaxErrorMsg(
-          request,
-          status,
-          error
-        )}`,
+        `Failed to load ${prog} due to: ${AjaxErrorMsg(request, status, error)}`,
         true
       );
     },
@@ -420,8 +401,7 @@ let Window = function (title, program, pass) {
   let winMaxZ = 1;
 
   document.querySelectorAll("window").forEach((w) => {
-    if (winMaxZ < (Number(w.style["z-index"]) || 1))
-      winMaxZ = Number(w.style["z-index"]);
+    if (winMaxZ < (Number(w.style["z-index"]) || 1)) winMaxZ = Number(w.style["z-index"]);
   });
 
   win.style["z-index"] = winMaxZ + 1;
@@ -477,10 +457,8 @@ let Window = function (title, program, pass) {
   this.closeButton = winClose;
 
   // Puts the new window in the middle of the screen.
-  win.style.top =
-    _("active-area").offsetHeight / 2 - win.offsetHeight / 2 + "px";
-  win.style.left =
-    _("active-area").offsetWidth / 2 - win.offsetWidth / 2 + "px";
+  win.style.top = _("active-area").offsetHeight / 2 - win.offsetHeight / 2 + "px";
+  win.style.left = _("active-area").offsetWidth / 2 - win.offsetWidth / 2 + "px";
 
   this.offscreen = function () {
     //TODO: find better way of doing this (detect when any part of the window is offscreen)
@@ -518,9 +496,7 @@ let OnLogin = function () {
       path: "/system",
     },
     success: function (f, text) {
-      let syscfg = f.files.filter(
-        (p) => p.path == "/system/installed.syscfg"
-      )[0].content; //TODO: add orangescreen if no file
+      let syscfg = f.files.filter((p) => p.path == "/system/installed.syscfg")[0].content; //TODO: add orangescreen if no file
       if (!syscfg) return;
 
       (JSON.parse(syscfg) || []).forEach((p) => {
@@ -545,8 +521,7 @@ let LoginErrors = {
   DIR_NOT_EXIST: "Invalid username.",
   NO_CREDENTIALS:
     "There is no password associated with this account. Please contact to have it reset.",
-  ERR_WHEN_READING_CREDENTIALS:
-    "An unexpected error getting your password occurred.",
+  ERR_WHEN_READING_CREDENTIALS: "An unexpected error getting your password occurred.",
   INCORRECT_PASSWORD: "Incorrect password.",
 };
 let Login = function () {
@@ -555,10 +530,8 @@ let Login = function () {
   let rememberUsername = _("remember-username").checked;
   let rememberPassword = _("remember-password").checked;
 
-  if (!username)
-    return (_("overlay-login-error").innerHTML = "Please enter a username.");
-  if (!password)
-    return (_("overlay-login-error").innerHTML = "Please enter a password.");
+  if (!username) return (_("overlay-login-error").innerHTML = "Please enter a username.");
+  if (!password) return (_("overlay-login-error").innerHTML = "Please enter a password.");
 
   let oldHTML = _("overlay-login-enter").innerHTML;
   _("overlay-login-enter").innerHTML =
@@ -574,8 +547,7 @@ let Login = function () {
     success: function (data, text) {
       _("overlay-login-enter").innerHTML = oldHTML;
 
-      if (data.error)
-        return (_("overlay-login-error").innerHTML = LoginErrors[data.error]);
+      if (data.error) return (_("overlay-login-error").innerHTML = LoginErrors[data.error]);
 
       Auth = {
         username: username,
@@ -599,11 +571,7 @@ let Login = function () {
 
       MeowOS.ErrorHandler(
         "SYSTEM",
-        `Failed to login to MeowOS due to: ${AjaxErrorMsg(
-          request,
-          status,
-          error
-        )}`,
+        `Failed to login to MeowOS due to: ${AjaxErrorMsg(request, status, error)}`,
         true
       );
     },
@@ -632,16 +600,10 @@ _("overlay-create-login").onclick = function () {
 // Version 1.0.0.0
 // Modified 12/24/2020
 
-MeowOS.ErrorHandler = function (
-  location = "SYSTEM",
-  error,
-  reportToDevs = false
-) {
+MeowOS.ErrorHandler = function (location = "SYSTEM", error, reportToDevs = false) {
   var errorData = error.message ? error.message : error;
   if (error.stack || error.stacktrace)
-    errorData += `\nStacktrace: ${
-      error.stack ? error.stack : error.stacktrace
-    }`;
+    errorData += `\nStacktrace: ${error.stack ? error.stack : error.stacktrace}`;
   document.body.innerHTML = `
     <style>
       html, body { width: 100%; height: 100%; }
@@ -694,8 +656,7 @@ MeowOS.log = function (type, location, message) {
   var locationcolor = loggingcolors.FgWhite;
 
   if (location == "SYSTEM") locationcolor = loggingcolors.FgGreen;
-  else if (location == "PROGRAM LOADER")
-    locationcolor = loggingcolors.FgMagenta;
+  else if (location == "PROGRAM LOADER") locationcolor = loggingcolors.FgMagenta;
 
   console.log(
     `(${typecolor}${type}${loggingcolors.Reset}) [${locationcolor}${location}${loggingcolors.Reset}] ${message}`

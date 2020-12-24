@@ -7,11 +7,7 @@
 let requiredToLoad = 3; // set initial load requirement
 
 window.onload = function () {
-  MeowOS.log(
-    "i",
-    "SYSTEM",
-    `MeowOS v${MeowOS.system.version} is now loading...`
-  );
+  MeowOS.log("i", "SYSTEM", `MeowOS v${MeowOS.system.version} is now loading...`);
   loaded++;
 };
 setTimeout(function () {
@@ -37,14 +33,12 @@ let ONLOAD = function () {
 
   MeowOS.log("S", "SYSTEM", `MeowOS v${MeowOS.system.version} has loaded!`);
 
-  document.getElementsByTagName("title")[0].innerHTML =
-    "MeowOS | v" + MeowOS.system.version;
+  document.getElementsByTagName("title")[0].innerHTML = "MeowOS | v" + MeowOS.system.version;
 
   document.onclick = function (e) {
     if (MeowOS.error) return;
 
-    if (e.target.id !== "context-menu")
-      _("context-menu").style.display = "none";
+    if (e.target.id !== "context-menu") _("context-menu").style.display = "none";
   };
   document.oncontextmenu = function (e) {
     if (MeowOS.error) return;
@@ -74,8 +68,7 @@ let ONLOAD = function () {
     if (MeowOS.error) return;
 
     let date = new Date();
-    let clockTime =
-      date.toLocaleTimeString() + "<br>" + date.toLocaleDateString();
+    let clockTime = date.toLocaleTimeString() + "<br>" + date.toLocaleDateString();
     _("taskbar-clock").innerHTML = clockTime;
   }, 500);
 
