@@ -6,7 +6,7 @@ var rand = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 window.WINDOWS = [];
-window.APIURL = "http://localhost:6969/"; // set API URL, will need to be changed when official release is out
+window.APIURL = "https://service-2308.something.gg/"; // set API URL, will need to be changed when official release is out
 
 let MakeWindowsInteractive = function () {
   $("window").draggable({
