@@ -105,7 +105,7 @@ let programsInstalled = [
   "calculator",
   "filesystem",
   "codemirror",
-  "test",
+  "store",
 ]; //TODO: make this dynamic based on installed.syscfg
 requiredToLoad += programsInstalled.length;
 programsInstalled.forEach((p) => {
