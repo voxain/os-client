@@ -397,6 +397,7 @@ let Window = function (title, program, pass) {
   try {
     this.program.eval(this.window, pass);
   } catch (e) {
+    console.error(e);
     this.content.innerHTML = "Error."; //TODO: pass actual error, and maybe more info
   }
 
