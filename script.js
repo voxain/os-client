@@ -39,6 +39,8 @@ let ONLOAD = function () {
     if (MeowOS.error) return;
 
     if (e.target.id !== "context-menu") _("context-menu").style.display = "none";
+    if (e.target.id !== "taskbar-menu" && e.target.parentElement.id !== "taskbar-button")
+      _("taskbar-menu").style.display = "none";
   };
   document.oncontextmenu = function (e) {
     if (MeowOS.error) return;
