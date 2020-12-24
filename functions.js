@@ -1,3 +1,55 @@
+/*
+ * functions.js
+ * Author: Meow Developers
+ * Copyright Meow Developers
+*/
+
+const meowos = {
+  error: false, // probably will fix this later, idk its 1 am in the morning, help
+  system: {
+    loggingcolors: {
+      Reset: "\x1b[37m",
+
+      FgBlack: "\x1b[30m",
+      FgRed: "\x1b[31m",
+      FgGreen: "\x1b[32m",
+      FgYellow: "\x1b[33m",
+      FgBlue: "\x1b[34m",
+      FgMagenta: "\x1b[35m",
+      FgCyan: "\x1b[36m",
+      FgWhite: "\x1b[37m",
+
+      BgBlack: "\x1b[40m",
+      BgRed: "\x1b[41m",
+      BgGreen: "\x1b[42m",
+      BgYellow: "\x1b[43m",
+      BgBlue: "\x1b[44m",
+      BgMagenta: "\x1b[45m",
+      BgCyan: "\x1b[46m",
+      BgWhite: "\x1b[47m",
+    },
+    version: "0.1.0", //TODO: include proper versioning
+  },
+};
+
+function AjaxErrorMsg(request, status, error) {
+  var message = "NO_ERROR";
+  if (request.status === 0 && !window.navigator.onLine) {
+    message = "INTERNET_DISCONNECTED";
+  } else if (request.status == 404) {
+    message = "RESOURCE_NOT_FOUND"; // Hopefully to never see this
+  } else if (request.status == 500) {
+    message = "INTERNAL_API_ERROR";
+  } else if (status == "timeout") {
+    message = `TIMEOUT_REACHED_LOADING_${p.toUpperCase()}`;
+  } else if (status == "error") {
+    message = "CONNECTION_TO_API_FAILED";
+  } else {
+    message = status || response.status;
+  };
+  return message;
+};
+
 loaded++;
 var _ = function (id) {
   return document.getElementById(id);
@@ -9,6 +61,7 @@ window.WINDOWS = [];
 window.APIURL = "https://service-2308.something.gg/"; // set API URL, will need to be changed when official release is out
 
 let MakeWindowsInteractive = function () {
+  if (meowos.error) return;
   $("window").draggable({
     handle: ".window-title",
     containment: "document",
@@ -24,6 +77,7 @@ let MakeWindowsInteractive = function () {
   document.querySelectorAll("window:not([noresize])").forEach((win) => {
     let title = win.querySelector(".window-title");
     title.ondblclick = function () {
+      if (meowos.error) return;
       // fullscreen on double-click of title bar
       //TODO: make window return to previous size if double-clicked again
       $(title.parentElement).animate({
@@ -37,6 +91,7 @@ let MakeWindowsInteractive = function () {
   // Init minimize buttons.
   document.querySelectorAll(".window-minimize").forEach((minimize) => {
     minimize.onclick = function () {
+      if (meowos.error) return;
       $(minimize.parentElement).fadeOut({
         start: function () {
           $(this).css("transform", "scale(0.3)");
@@ -84,6 +139,8 @@ let MakeWindowsInteractive = function () {
 };
 
 let SaveWindows = function () {
+  if (meowos.error) return;
+
   let windows = [];
   WINDOWS.forEach((w) => {
     windows.push({
@@ -101,24 +158,33 @@ let SaveWindows = function () {
   // Formats the window JSON. (for easier reading/editing)
   let formattedWindowContent =
     js_beautify(JSON.stringify(windows)) || JSON.stringify(windows);
-  $.post(
-    APIURL + "fs/writeFile",
-    {
+
+  $.ajax({
+    type: "POST",
+    url: `${APIURL}fs/writeFile`,
+    data: {
       path: "/system/windowStore.syscfg",
       token: Auth.token,
       content: formattedWindowContent,
     },
-    (err) => {
-      if (err.error) console.error(err); //TODO: add orangescreen
+    error: function (request, status, error) {
+      if (meowos.error) return;
+
+      meowos.ErrorHandler("SYSTEM", `Failed to save window data due to: ${AjaxErrorMsg(request, status, error)}`, true);
     }
-  );
+  });
 };
 let LoadWindows = function () {
-  $.post(
-    APIURL + "fs/fetchFiles",
-    { token: Auth.token, path: "/system" },
-    (f) => {
-      if (f.error) return;
+  if (meowos.error) return;
+
+  $.ajax({
+    type: "POST",
+    url: `${APIURL}fs/fetchFiles`,
+    data: {
+      token: Auth.token,
+      path: "/system"
+    },
+    success: function (f, text) {
       let syscfg = f.files.filter(
         (p) => p.path == "/system/windowStore.syscfg"
       )[0].content;
@@ -136,20 +202,29 @@ let LoadWindows = function () {
           if (w.zIndex) win.window.style["z-index"] = w.zIndex;
         }, 500);
       });
+    },
+    error: function (request, status, error) {
+      if (meowos.error) return;
+
+      meowos.ErrorHandler("SYSTEM", `Failed to load window data due to: ${AjaxErrorMsg(request, status, error)}`, true);
+
     }
-  );
+  });
+
 };
 
 let ProgramList = {};
 let GetProgram = function (program) {
+  if (meowos.error) return;
   return ProgramList[(program || "").toLowerCase()] || {};
 };
 let InstallProgram = function (p) {
   if (meowos.error) return;
+
   meowos.log("i", "PROGRAM LOADER", `Loading '${p}'...`);
 
   $.ajax({
-    type: "get",
+    type: "GET",
     url: `${APIURL}programs/${p}`,
     success: function (program, text) {
       if (meowos.error) return;
@@ -174,24 +249,7 @@ let InstallProgram = function (p) {
     error: function (request, status, error) {
       if (meowos.error) return;
 
-      var message = "NO_ERROR";
-      if (request.status === 0 && !window.navigator.onLine) {
-        message = "INTERNET_DISCONNECTED";
-      } else if (request.status == 404) {
-        message = "RESOURCE_NOT_FOUND"; // Hopefully to never see this
-      } else if (request.status == 500) {
-        message = "INTERNAL_API_ERROR";
-      } else if (status == "timeout") {
-        message = `TIMEOUT_REACHED_LOADING_${p.toUpperCase()}`;
-      } else if (status == "error") {
-        message = "CONNECTION_TO_API_FAILED";
-      }
-
-      meowos.ErrorHandler(
-        "PROGRAM LOADER",
-        `Failed to load '${p}' due to: ${message}`,
-        true
-      );
+      meowos.ErrorHandler("PROGRAM LOADER", `Failed to load ${p} due to: ${AjaxErrorMsg(request, status, error)}`, true);
     },
   });
 };
@@ -200,18 +258,24 @@ let UninstallProgram = function (prog) {
   Object.keys(ProgramList).forEach((p) => {
     if (p !== prog) newPrograms.push(p); //TODO: find a better way to do this
   });
-  $.post(
-    APIURL + "fs/writeFile",
-    {
+
+  $.ajax({
+    type: "POST",
+    url: `${APIURL}fs/writeFile`,
+    data: {
       path: "/system/installed.syscfg",
       token: Auth.token,
       content: JSON.stringify(newPrograms),
     },
-    (err) => {
-      if (err.error) console.error(err); //TODO: add orangescreen
+    success: function (data, text) {
       window.location.reload();
+    },
+    error: function (request, status, error) {
+      if (meowos.error) return;
+
+      meowos.ErrorHandler("SYSTEM", `Failed to uninstall ${prog} due to: ${AjaxErrorMsg(request, status, error)}`, true);
     }
-  );
+  });
 };
 
 /**
@@ -280,17 +344,20 @@ let SetPrograms = function () {
       _("taskbar-menu").appendChild(progBox);
     });
 
-  $.post(
-    APIURL + "fs/writeFile",
-    {
-      path: "/system/installed.syscfg",
-      token: Auth.token,
-      content: JSON.stringify(Object.keys(ProgramList)),
-    },
-    (err) => {
-      if (err.error) console.error(err); //TODO: add orangescreen
-    }
-  );
+    $.ajax({
+      type: "POST",
+      url: `${APIURL}fs/writeFile`,
+      data: {
+        path: "/system/installed.syscfg",
+        token: Auth.token,
+        content: JSON.stringify(Object.keys(ProgramList)),
+      },
+      error: function (request, status, error) {
+        if (meowos.error) return;
+  
+        meowos.ErrorHandler("PROGRAM LOADER", `Failed to load ${prog} due to: ${AjaxErrorMsg(request, status, error)}`, true);
+      }
+    });
 };
 
 /**
@@ -409,11 +476,14 @@ let Window = function (title, program, pass) {
 };
 
 let OnLogin = function () {
-  $.post(
-    `${APIURL}fs/fetchFiles`,
-    { token: Auth.token, path: "/system" },
-    (f) => {
-      if (f.error) return; //TODO: add orangescreen here
+  $.ajax({
+    type: "POST",
+    url: `${APIURL}fs/fetchFiles`,
+    data: {
+      token: Auth.token,
+      path: "/system"
+    },
+    success: function (f, text) {
       let syscfg = f.files.filter(
         (p) => p.path == "/system/installed.syscfg"
       )[0].content; //TODO: add orangescreen if no file
@@ -422,8 +492,13 @@ let OnLogin = function () {
       (JSON.parse(syscfg) || []).forEach((p) => {
         InstallProgram(p);
       });
-    }
-  );
+    },
+    error: function (request, status, error) {
+      if (meowos.error) return;
+  
+      meowos.ErrorHandler("SYSTEM", `Failed to load data due to: ${AjaxErrorMsg(request, status, error)}`, true);
+      }
+  });
 };
 
 window.Auth = {};
@@ -448,12 +523,16 @@ let Login = function () {
     return (_("overlay-login-error").innerHTML = "Please enter a password.");
 
   let oldHTML = _("overlay-login-enter").innerHTML;
-  _("overlay-login-enter").innerHTML = "...";
+  _("overlay-login-enter").innerHTML = '<p class="loading-dots"><span>.</span><span>.</span><span>.</span></p>';
 
-  $.post(
-    APIURL + "account/login",
-    { username: username, password: password },
-    function (data) {
+  $.ajax({
+    type: "POST",
+    url: `${APIURL}account/login`,
+    data: {
+      username: username,
+      password: password
+    },
+    success: function (data, text) {
       _("overlay-login-enter").innerHTML = oldHTML;
 
       if (data.error)
@@ -475,8 +554,13 @@ let Login = function () {
       else localStorage.removeItem("passwordStore");
 
       OnLogin();
+    },
+    error: function (request, status, error) {
+      if (meowos.error) return;
+
+      meowos.ErrorHandler("SYSTEM", `Failed to login to MeowOS due to: ${AjaxErrorMsg(request, status, error)}`, true);
     }
-  );
+  });
 };
 
 _("overlay-login-enter").onclick = Login;
@@ -494,4 +578,77 @@ _("overlay-login-create").onclick = function () {
 _("overlay-create-login").onclick = function () {
   $("#overlay-create").fadeOut(400);
   $("#overlay-login").fadeIn(400);
+};
+
+
+// Cool Error Handler Script
+// Provided by Yours Truly, TCG
+// Version 1.0.0.0
+// Modified 12/24/2020
+
+meowos.ErrorHandler = function (
+  location = "SYSTEM",
+  error,
+  reportToDevs = false
+) {
+  var errorData = error.message ? error.message : error;
+  if (error.stack || error.stacktrace) errorData += `\nStacktrace: ${((error.stack) ? error.stack : error.stacktrace)}`;
+  document.body.innerHTML = `
+    <style>
+      html, body { width: 100%; height: 100%; }
+      #errorDiv {  position: absolute; width: 100%; height: 100%; font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; font-size: 20px; color: #23272A; /* color: #2C2F33; */ background-color: #FF9100; top: 0; left: 0; }
+      #errorDiv span { font-size: 26px; /* color: #E91E63; */ }
+      #errorDiv span#stop { font-size: 22px; }
+      #errorDiv p#reported { display: none; }
+    </style>
+    <div id="errorDiv">
+      <span>A fatal error has occurred and MeowOS has stopped execution.</span>
+      <p>
+        <span id="stop">STOP Error: </span>
+        <span>${errorData.split("\n")[0]}</span>
+        <br><br>
+        In order to continue using MeowOS, you will need to <a href="javascript:window.location.reload()">reload the page</a>. Any progress on or within programs may be lost.
+      </p>
+      <br>
+      <p id="reported">This incident has been reported to the MeowOS Developers.</p>
+    </div>
+  `;
+  meowos.log("X", location, errorData);
+
+  if (reportToDevs) {
+    // TODO: Report to the damn developers or something...
+    // ~ TCG 12/24/2020
+
+    document.getElementById("reported").style.display = "show";
+  }
+  meowos.error = true;
+};
+
+// Cool Logging Script
+// Also provided by Yours Truly, TCG
+// Version 1.0.0.0
+// Modified 12/23/2020
+
+meowos.log = function (type, location, message) {
+  // This is crappy code
+  var loggingcolors = meowos.system.loggingcolors,
+    typecolor = loggingcolors.FgWhite;
+
+  if (type == "X") typecolor = loggingcolors.FgRed;
+  // X = Error
+  else if (type == "i") typecolor = loggingcolors.FgBlue;
+  // i = Information
+  else if (type == "!") typecolor = loggingcolors.FgYellow;
+  // ! = Warning
+  else if (type == "S") typecolor = loggingcolors.FgGreen; // S = Success
+
+  var locationcolor = loggingcolors.FgWhite;
+
+  if (location == "SYSTEM") locationcolor = loggingcolors.FgGreen;
+  else if (location == "PROGRAM LOADER")
+    locationcolor = loggingcolors.FgMagenta;
+
+  console.log(
+    `(${typecolor}${type}${loggingcolors.Reset}) [${locationcolor}${location}${loggingcolors.Reset}] ${message}`
+  );
 };
