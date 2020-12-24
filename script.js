@@ -23,6 +23,16 @@ if (storedPassword) {
 }
 _("overlay-login-username").select();
 
+let getStatus = function () {
+  $.get(APIURL, function (status) {
+    _("overlay-status").innerHTML = `Server Status: <div id="overlay-status-icon" st="up"></div>`;
+  }).fail(() => {
+    _("overlay-status").innerHTML = `Server Status: <div id="overlay-status-icon" st="down"></div>`;
+  });
+};
+getStatus();
+setInterval(getStatus, 4000);
+
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
   if (!Auth.token) return;

@@ -340,6 +340,31 @@ window {
   background-color: #1361af;
 }
 
+#overlay-status {
+  font-family: "Nevis";
+  color: white;
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  cursor: default;
+  -webkit-user-select: none;
+}
+#overlay-status-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid white;
+  vertical-align: text-bottom;
+  box-sizing: border-box;
+}
+#overlay-status-icon[st="up"] {
+  background-color: #0ed145;
+}
+#overlay-status-icon[st="down"] {
+  background-color: #f2072e;
+}
+
 #context-menu {
   box-sizing: border-box;
   display: none;
