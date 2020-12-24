@@ -191,6 +191,25 @@ let InstallProgram = function (p) {
     },
   });
 };
+let UninstallProgram = function (prog) {
+  let newPrograms = [];
+  Object.keys(ProgramList).forEach((p) => {
+    if (p !== prog) newPrograms.push(p); //TODO: find a better way to do this
+  });
+  $.post(
+    APIURL + "fs/writeFile",
+    {
+      path: "/system/installed.syscfg",
+      token: Auth.token,
+      content: JSON.stringify(newPrograms),
+    },
+    (err) => {
+      if (err.error) console.error(err); //TODO: add orangescreen
+      window.location.reload();
+    }
+  );
+};
+
 /**
  * Initializes ("installs") a program
  * @constructor
