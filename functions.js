@@ -178,6 +178,8 @@ let SetPrograms = function () {
     .forEach((prog) => {
       // Creates program in start menu.
       prog = ProgramList[prog];
+      if (prog.hidden) return;
+
       let progBox = document.createElement("div");
       progBox.className = "taskbar-program";
       progBox.setAttribute("noselect", "");
