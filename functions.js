@@ -286,13 +286,21 @@ let Window = function (title, program, pass) {
   let win = document.createElement("window");
   win.style.position = "absolute";
   win.style.display = "none";
-  win.style["z-index"] = 1000; //TODO: find out a better way to do this
   if (this.program.defaultWidth) win.style.width = this.program.defaultWidth;
   if (this.program.defaultHeight) win.style.height = this.program.defaultHeight;
   if (this.program.minWidth) win.style["min-width"] = this.program.minWidth;
   if (this.program.minHeight) win.style["min-height"] = this.program.minHeight;
   if (this.program.noResize) win.setAttribute("noresize", "");
   win.setAttribute("os-id", this.id);
+
+  let winMaxZ = 1;
+
+  document.querySelectorAll("window").forEach((w) => {
+    if (winMaxZ < (Number(w.style["z-index"]) || 1))
+      winMaxZ = Number(w.style["z-index"]);
+  });
+
+  win.style["z-index"] = winMaxZ + 1;
 
   let winTitle = document.createElement("div");
   winTitle.className = "window-title";
