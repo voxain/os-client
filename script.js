@@ -9,14 +9,23 @@ let programsInstalled = [
 ];
 requiredToLoad += programsInstalled.length;
 programsInstalled.forEach((p) => {
-  $.getScript("./programs/" + p + ".js", function () {
+  $.get(`${APIURL}programs/${p}`, function (program) {
+    let css = program.style || "";
+    if (css) {
+      let style = document.createElement("style");
+      style.innerHTML = css;
+      style.setAttribute("os-for-program", p);
+      document.head.appendChild(style);
+    }
+
+    let html = program.html || "";
+    window[`program-html-${p}`] = html;
+
+    let js = program.script;
+    eval(js);
+
     loaded++;
   });
-  $("<link/>", {
-    rel: "stylesheet",
-    type: "text/css",
-    href: "./programs/" + p + ".css",
-  }).appendTo("head");
   console.log(`Loading ${p}...`);
 });
 
@@ -57,7 +66,7 @@ let ONLOAD = function () {
 
   SetPrograms();
   LoadWindows();
-  setInterval(SaveWindows, 500);
+  setInterval(SaveWindows, 5000);
 
   _("taskbar-button").onclick = function () {
     if (_("taskbar-menu").style.display == "block") {

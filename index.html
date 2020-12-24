@@ -16,27 +16,29 @@
       gtag("config", "UA-164238671-2");
     </script>
 
-    <title>LeafletOS</title>
+    <title>Log In</title>
     <link rel="icon" href="./favicon.ico" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <script src="./codemirror/codemirror.js" defer></script>
-    <link rel="stylesheet" href="./codemirror/codemirror.css" />
-    <script src="./codemirror/init.js" defer></script>
+    <script src="./self/codemirror/codemirror.js" defer></script>
+    <link rel="stylesheet" href="./self/codemirror/codemirror.css" />
+    <script src="./self/codemirror/init.js" defer></script>
+
+    <script src="./self/formatter/beautify.js.js"></script>
+    <script src="./self/formatter/beautify.html.js"></script>
+    <script src="./self/formatter/beautify.css.js"></script>
 
     <link rel="stylesheet" href="./style.css" />
 
     <script>
       window.loaded = 0;
     </script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
-    />
+    <script src="./self/jquery/jquery-3.5.1.js"></script>
+    <script src="./self/jquery/jquery.ui-1.12.1.js"></script>
+    <link rel="stylesheet" href="./self/jquery/jquery.ui-3.5.1.css" />
+    <script src="./self/jquery/jquery.touchpunch-0.2.3.js"></script>
   </head>
   <body>
     <div id="overlay">
@@ -100,7 +102,7 @@
         <img noselect src="./logo.png" alt="" />
       </div>
       <div id="taskbar-menu"></div>
-      <div id="taskbar-programs"></div>
+      <div id="taskbar-items"></div>
       <div id="taskbar-icons">
         <div id="taskbar-clock" noselect>7:00:00 PM<br />12/31/1969</div>
       </div>

@@ -12,6 +12,7 @@ const router = express.Router();
 app.use(bodyParser.json());
 
 router.post("/fetchFiles", (req, res) => {
+  console.log(req.body);
   axios
     .post(APIURL + "fetchFiles", req.body)
     .then((resp) => {
