@@ -534,8 +534,10 @@ let Login = function () {
   if (!password) return (_("overlay-login-error").innerHTML = "Please enter a password.");
 
   let oldHTML = _("overlay-login-enter").innerHTML;
-  _("overlay-login-enter").innerHTML =
-    '<p class="loading-dots"><span>.</span><span>.</span><span>.</span></p>';
+  _("overlay-login-enter").innerHTML = "...";
+  let loadingInt = setInterval(function () {
+    _("overlay-login-enter").innerHTML += ".";
+  }, 400);
 
   $.ajax({
     type: "POST",
@@ -546,6 +548,7 @@ let Login = function () {
     },
     success: function (data, text) {
       _("overlay-login-enter").innerHTML = oldHTML;
+      clearInterval(loadingInt);
 
       if (data.error) return (_("overlay-login-error").innerHTML = LoginErrors[data.error]);
 
