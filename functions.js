@@ -162,6 +162,8 @@ let Program = function (name, func) {
       minWidth: options.minWidth || "",
       minHeight: options.minHeight || "",
       noResize: options.noResize || false,
+      hidden: options.hidden || false,
+      fullOptions: options,
     };
     ProgramList[name.toLowerCase()] = this.program;
   });
