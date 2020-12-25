@@ -22,8 +22,6 @@ let ONLOAD = function () {
 
   MeowOS.log("S", "SYSTEM", `MeowOS v${MeowOS.system.version} has loaded!`);
 
-  document.getElementsByTagName("title")[0].innerHTML = "MeowOS | v" + MeowOS.system.version;
-
   document.onclick = function (e) {
     if (MeowOS.error) return;
 

@@ -52,3 +52,5 @@ var rand = function (min, max) {
 };
 window.WINDOWS = [];
 window.APIURL = "https://service-2308.something.gg/"; // set API URL, will need to be changed when official release is out
+
+document.getElementsByTagName("title")[0].innerHTML = "MeowOS v" + MeowOS.system.version;
