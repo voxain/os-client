@@ -68,18 +68,6 @@ let ONLOAD = function () {
   SetPrograms();
   LoadWindows();
   setInterval(SaveWindows, 3000); //TODO: make this save when windows are moved (prevents API spam)
-
-  // Detect if windows are off-screen and move them into the screen.
-  setInterval(function () {
-    if (MeowOS.error) return;
-
-    WINDOWS.forEach((W) => {
-      if (W.offscreen()) {
-        W.window.style.top = "0px";
-        W.window.style.left = "0px";
-      }
-    });
-  }, 1000);
 };
 
 let ONLOADINT = setInterval(ONLOAD);
