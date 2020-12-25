@@ -42,6 +42,8 @@ let ONLOAD = function () {
 
   if (MeowOS.error) return;
 
+  window.loaded = true;
+
   MeowOS.log("S", "SYSTEM", `MeowOS v${MeowOS.system.version} has loaded!`);
 
   document.getElementsByTagName("title")[0].innerHTML = "MeowOS | v" + MeowOS.system.version;
