@@ -4,20 +4,14 @@
  * Copyright Meow Developers
  */
 
-let windowLoaded = false;
 window.onload = function () {
   MeowOS.log("i", "SYSTEM", `MeowOS v${MeowOS.system.version} is now loading...`);
-  windowLoaded = true;
 };
 
 let ONLOAD = function () {
-  if (windowLoaded) return;
   if (!Auth.token) return;
-
   clearInterval(ONLOADINT);
-
   if (MeowOS.error) return;
-
   window.loaded = true;
 
   MeowOS.log("S", "SYSTEM", `MeowOS v${MeowOS.system.version} has loaded!`);
