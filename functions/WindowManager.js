@@ -15,35 +15,40 @@ window.MakeWindowsInteractive = function () {
   document.querySelectorAll("window:not([noresize])").forEach((win) => {
     let title = win.querySelector(".window-title");
     let originalSize = {};
-    let normalSize = {
-      height: _("active-area").offsetHeight,
-      width: _("active-area").offsetWidth,
-      left: "0px",
-      top: "0px",
-    };
     let full = false;
     title.ondblclick = function () {
       // fullscreen on double-click of title bar
+      let fullSize = {
+        height: _("active-area").offsetHeight,
+        width: _("active-area").offsetWidth,
+        left: "0px",
+        top: "0px",
+      };
 
-      if (
-        title.parentElement.offsetWidth == _("active-area").offsetWidth &&
-        title.parentElement.offsetHeight == _("active-area").offsetHeight
-      )
-        full = true;
+      let handle = function () {
+        let windowElem = title.parentElement;
+        let isFull =
+          windowElem.offsetWidth == fullSize.width &&
+          windowElem.offsetHeight == fullSize.height &&
+          windowElem.style.left == fullSize.left &&
+          windowElem.style.top == fullSize.top;
 
-      if (!full) {
-        full = true;
-        originalSize = {
-          height: title.parentElement.offsetHeight,
-          width: title.parentElement.offsetWidth,
-          left: title.parentElement.style.left,
-          top: title.parentElement.style.top,
-        };
-        $(title.parentElement).animate(normalSize);
-      } else {
-        full = false;
-        $(title.parentElement).animate(originalSize);
-      }
+        if (!full) {
+          full = true;
+          originalSize = {
+            height: windowElem.offsetHeight,
+            width: windowElem.offsetWidth,
+            left: windowElem.style.left,
+            top: windowElem.style.top,
+          };
+          $(windowElem).animate(fullSize);
+        } else {
+          full = false;
+          if (!isFull) return handle();
+          $(windowElem).animate(originalSize);
+        }
+      };
+      handle();
     };
   });
   // Init minimize buttons.
