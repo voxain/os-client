@@ -44,7 +44,6 @@ function AjaxErrorMsg(request, status, error) {
   return message;
 }
 
-loaded++;
 var _ = function (id) {
   return document.getElementById(id);
 }; // "Mini jQuery" function for IDs.

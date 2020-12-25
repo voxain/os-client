@@ -4,15 +4,14 @@
  * Copyright Meow Developers
  */
 
-let requiredToLoad = 3; // set initial load requirement
-
+let windowLoaded = false;
 window.onload = function () {
   MeowOS.log("i", "SYSTEM", `MeowOS v${MeowOS.system.version} is now loading...`);
-  loaded++;
+  windowLoaded = true;
 };
 
 let ONLOAD = function () {
-  if (loaded !== requiredToLoad) return;
+  if (windowLoaded) return;
   if (!Auth.token) return;
 
   clearInterval(ONLOADINT);
