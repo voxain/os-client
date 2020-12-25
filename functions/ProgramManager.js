@@ -44,7 +44,7 @@ let InstallProgram = function (p) {
   });
 };
 
-MeowOS.UninstallProgram = function (prog) {
+UninstallProgram = function (prog) {
   let newPrograms = [];
   Object.keys(MeowOS.ProgramList).forEach((p) => {
     if (p !== prog) newPrograms.push(p); //TODO: find a better way to do this
