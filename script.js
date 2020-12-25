@@ -69,24 +69,6 @@ let ONLOAD = function () {
   LoadWindows();
   setInterval(SaveWindows, 3000); //TODO: make this save when windows are moved (prevents API spam)
 
-  _("taskbar-button").onclick = function () {
-    if (MeowOS.error) return;
-
-    if (_("taskbar-menu").style.display == "block") {
-      _("taskbar-menu").style.display = "none";
-    } else {
-      _("taskbar-menu").style.display = "block";
-    }
-  }; //TODO: hide menu when clicked outside of it
-
-  setInterval(function () {
-    if (MeowOS.error) return;
-
-    let date = new Date();
-    let clockTime = date.toLocaleTimeString() + "<br>" + date.toLocaleDateString();
-    _("taskbar-clock").innerHTML = clockTime;
-  }, 500);
-
   // Detect if windows are off-screen and move them into the screen.
   setInterval(function () {
     if (MeowOS.error) return;
