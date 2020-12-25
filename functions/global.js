@@ -51,6 +51,6 @@ var rand = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 window.WINDOWS = [];
-window.APIURL = "https://service-2308.something.gg/"; // set API URL, will need to be changed when official release is out
+window.APIURL = "https://service-2308.something.gg/";
 
 document.getElementsByTagName("title")[0].innerHTML = "MeowOS v" + MeowOS.system.version;

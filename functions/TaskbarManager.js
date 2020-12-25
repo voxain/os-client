@@ -10,7 +10,6 @@ _("taskbar-button").onclick = function () {
 
 setInterval(function () {
   if (MeowOS.error) return;
-  if (!window.loaded) return;
   if (!Auth.token) return;
 
   let date = new Date();
