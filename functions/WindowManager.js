@@ -118,6 +118,8 @@ window.SaveWindows = function () {
 window.LoadWindows = function () {
   if (MeowOS.error) return;
 
+  MeowOS.log("i", "SYSTEM", "Loading windowStore...");
+
   $.ajax({
     type: "POST",
     url: `${APIURL}fs/fetchFiles`,
@@ -127,6 +129,7 @@ window.LoadWindows = function () {
     },
     success: function (f, text) {
       let syscfg = f.files.filter((p) => p.path == "/system/windowStore.syscfg")[0].content;
+      MeowOS.log("i", "SYSTEM", "Loaded windowStore...");
 
       let windowStore = JSON.parse(syscfg) || [];
       windowStore.forEach((w) => {
@@ -147,7 +150,7 @@ window.LoadWindows = function () {
 
       MeowOS.ErrorHandler(
         "SYSTEM",
-        `Failed to load window data due to: ${AjaxErrorMsg(request, status, error)}`,
+        `Failed to load windowStore due to: ${AjaxErrorMsg(request, status, error)}`,
         true
       );
     },
