@@ -10,28 +10,6 @@ window.onload = function () {
   MeowOS.log("i", "SYSTEM", `MeowOS v${MeowOS.system.version} is now loading...`);
   loaded++;
 };
-setTimeout(function () {
-  loaded++;
-}, 3000); //TODO: remove this + decrement requiredToLoad
-
-let storedUsername = localStorage.getItem("usernameStore");
-if (storedUsername) _("overlay-login-username").value = storedUsername;
-let storedPassword = localStorage.getItem("passwordStore");
-if (storedPassword) {
-  _("overlay-login-password").value = storedPassword;
-  _("remember-password").click();
-}
-_("overlay-login-username").select();
-
-let getStatus = function () {
-  $.get(APIURL, function (status) {
-    _("overlay-status").innerHTML = `Server Status: <div id="overlay-status-icon" st="up"></div>`;
-  }).fail(() => {
-    _("overlay-status").innerHTML = `Server Status: <div id="overlay-status-icon" st="down"></div>`;
-  });
-};
-getStatus();
-let getStatusInt = setInterval(getStatus, 4000);
 
 let ONLOAD = function () {
   if (loaded !== requiredToLoad) return;
