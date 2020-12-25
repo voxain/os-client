@@ -17,7 +17,7 @@ let OnLogin = function () {
       path: "/system",
     },
     success: function (f, text) {
-      let settings = fs.files.filter((p) => p.path == "/system/settings.syscfg")[0].content;
+      let settings = f.files.filter((p) => p.path == "/system/settings.syscfg")[0].content;
       settings = JSON.parse(settings);
       if (settings.background)
         _("active-area").style["background-image"] = `url("${settings.background}")`;
