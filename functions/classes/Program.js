@@ -6,7 +6,7 @@
  */
 let Program = function (name, func) {
   // Currently only "official" programs are supported.
-  $.get(`${APIURL}programs/${name}`, function (program) {
+  $.get(`${MeowOS.APIURL}programs/${name}`, function (program) {
     let options = program.meta;
 
     this.program = {
@@ -23,7 +23,7 @@ let Program = function (name, func) {
       hidden: options.hidden || false,
       fullOptions: options,
     };
-    ProgramList[name.toLowerCase()] = this.program;
+    MeowOS.ProgramList[name.toLowerCase()] = this.program;
     SetPrograms();
   });
 };

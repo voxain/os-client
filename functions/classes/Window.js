@@ -107,5 +107,5 @@ let Window = function (title, program, pass) {
     this.content.innerHTML = "Error."; //TODO: pass actual error, and maybe more info
   }
 
-  WINDOWS.push(this);
+  MeowOS.WINDOWS.push(this);
 };

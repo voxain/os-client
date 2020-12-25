@@ -1,4 +1,4 @@
-window.MakeWindowsInteractive = function () {
+MakeWindowsInteractive = function () {
   if (MeowOS.error) return;
   $("window").draggable({
     handle: ".window-title",
@@ -80,10 +80,10 @@ window.MakeWindowsInteractive = function () {
   document.querySelectorAll(".window-close").forEach((close) => {
     close.onclick = function () {
       let newWINDOWS = [];
-      WINDOWS.forEach((w) => {
+      MeowOS.WINDOWS.forEach((w) => {
         if (close.parentElement !== w.window) newWINDOWS.push(w);
       });
-      WINDOWS = newWINDOWS;
+      MeowOS.WINDOWS = newWINDOWS;
       $(close.parentElement).fadeOut({
         start: function () {
           $(this).css("transform", "scale(0.3)");
@@ -101,11 +101,11 @@ window.MakeWindowsInteractive = function () {
   });
 };
 
-window.SaveWindows = function () {
+SaveWindows = function () {
   if (MeowOS.error) return;
 
   let windows = [];
-  WINDOWS.forEach((w) => {
+  MeowOS.WINDOWS.forEach((w) => {
     windows.push({
       left: w.window.style.left,
       top: w.window.style.top,
@@ -123,7 +123,7 @@ window.SaveWindows = function () {
 
   $.ajax({
     type: "POST",
-    url: `${APIURL}fs/writeFile`,
+    url: `${MeowOS.APIURL}fs/writeFile`,
     data: {
       path: "/system/windowStore.syscfg",
       token: Auth.token,
@@ -140,14 +140,15 @@ window.SaveWindows = function () {
     },
   });
 };
-window.LoadWindows = function () {
+
+LoadWindows = function () {
   if (MeowOS.error) return;
 
   MeowOS.log("i", "SYSTEM", "Loading windowStore...");
 
   $.ajax({
     type: "POST",
-    url: `${APIURL}fs/fetchFiles`,
+    url: `${MeowOS.APIURL}fs/fetchFiles`,
     data: {
       token: Auth.token,
       path: "/system",
@@ -159,7 +160,7 @@ window.LoadWindows = function () {
       let windowStore = JSON.parse(syscfg) || [];
       windowStore.forEach((w) => {
         let waitInterval = setInterval(function () {
-          if (!ProgramList[w.program]) return;
+          if (!MeowOS.ProgramList[w.program]) return;
           clearInterval(waitInterval);
           let win = new Window(w.title, w.program);
           win.window.style.top = w.top;
@@ -186,7 +187,7 @@ window.LoadWindows = function () {
 setInterval(function () {
   if (MeowOS.error) return;
 
-  WINDOWS.forEach((W) => {
+  MeowOS.WINDOWS.forEach((W) => {
     if (W.offscreen()) {
       W.window.style.top = "0px";
       W.window.style.left = "0px";

@@ -1,4 +1,4 @@
-window.Auth = {};
+let Auth = {};
 
 let LoginErrors = {
   DIR_NOT_EXIST: "Invalid username.",
@@ -11,7 +11,7 @@ let LoginErrors = {
 let OnLogin = function () {
   $.ajax({
     type: "POST",
-    url: `${APIURL}fs/fetchFiles`,
+    url: `${MeowOS.APIURL}fs/fetchFiles`,
     data: {
       token: Auth.token,
       path: "/system",
@@ -48,12 +48,13 @@ let Login = function () {
   let oldHTML = _("overlay-login-enter").innerHTML;
   _("overlay-login-enter").innerHTML = "...";
   let loadingInt = setInterval(function () {
+    if (MeowOS.error) return;
     _("overlay-login-enter").innerHTML += ".";
   }, 400);
 
   $.ajax({
     type: "POST",
-    url: `${APIURL}account/login`,
+    url: `${MeowOS.APIURL}account/login`,
     data: {
       username: username,
       password: password,
@@ -123,7 +124,8 @@ _("overlay-create-login").onclick = function () {
 };
 
 let getStatus = function () {
-  $.get(APIURL, function (status) {
+  if (MeowOS.error) return;
+  $.get(MeowOS.APIURL, function (status) {
     _("overlay-status").innerHTML = `Server Status: <div id="overlay-status-icon" st="up"></div>`;
   }).fail(() => {
     _("overlay-status").innerHTML = `Server Status: <div id="overlay-status-icon" st="down"></div>`;

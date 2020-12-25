@@ -12,7 +12,7 @@ let ONLOAD = function () {
   if (!Auth.token) return;
   clearInterval(ONLOADINT);
   if (MeowOS.error) return;
-  window.loaded = true;
+  MeowOS.loaded = true;
 
   MeowOS.log("S", "SYSTEM", `MeowOS v${MeowOS.system.version} has loaded!`);
 
