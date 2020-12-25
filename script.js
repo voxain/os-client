@@ -15,7 +15,6 @@ let ONLOAD = function () {
   if (!Auth.token) return;
 
   clearInterval(ONLOADINT);
-  clearInterval(getStatusInt);
 
   if (MeowOS.error) return;
 
