@@ -1,4 +1,4 @@
-let MakeWindowsInteractive = function () {
+window.MakeWindowsInteractive = function () {
   if (MeowOS.error) return;
   $("window").draggable({
     handle: ".window-title",
@@ -76,7 +76,7 @@ let MakeWindowsInteractive = function () {
   });
 };
 
-let SaveWindows = function () {
+window.SaveWindows = function () {
   if (MeowOS.error) return;
 
   let windows = [];
@@ -115,7 +115,7 @@ let SaveWindows = function () {
     },
   });
 };
-let LoadWindows = function () {
+window.LoadWindows = function () {
   if (MeowOS.error) return;
 
   $.ajax({
