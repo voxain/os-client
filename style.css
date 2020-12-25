@@ -37,7 +37,6 @@ body {
   width: 100%;
   display: block;
   background-size: cover;
-  background: no-repeat center center fixed;
 }
 
 #taskbar {
